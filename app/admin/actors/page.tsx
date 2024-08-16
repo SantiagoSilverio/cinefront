@@ -21,7 +21,7 @@ const ActorsPage: React.FC = () => {
 
       const fetchActors = async (page: number) => {
             try {
-                  const response = await fetch(`https://back-k1a3.onrender.com/actor/?page=${page}&state=true`);
+                  const response = await fetch("https://back-k1a3.onrender.com/actor/?page=${page}&state=true");
                   if (!response.ok) {
                         throw new Error('Error fetching actors');
                   }
@@ -35,8 +35,8 @@ const ActorsPage: React.FC = () => {
 
       const deleteActor = async (id: number) => {
             try {
-                  const response = await fetch(`https://back-k1a3.onrender.com/actor/${id}/`, {
-                        method: 'PATCH', // Usar PATCH para actualizaciÃ³n parcial
+                  const response = await fetch("https://back-k1a3.onrender.com/actor/${id}/", {
+                        method: 'PATCH', // Usar PATCH para actualización parcial
                         headers: {
                               'Content-Type': 'application/json',
                         },
