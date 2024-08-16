@@ -2,11 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Footer from '../../components/footer/Footer';
-import Navbar from '../../components/navbar/Navbar';
-import ActorForm from '../../components/actors/ActorForm';
+
+import ActorForm from '../../../components/actors/ActorForm';
 import Link from 'next/link';
-import { Actor } from '../../types/actors';
+import { Actor } from '../../../types/actors';
 import '../../nuevoactor/nuevoactor.css'; // Usa el mismo CSS que para la otra página
 
 const EditActorPage: React.FC = () => {

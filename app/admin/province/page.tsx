@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Footer from '../components/footer/Footer';
-import Navbar from '../components/navbar/Navbar';
+
 import Link from 'next/link';
-import ProvinceForm from '../components/province/ProvinceForm';
-import ProvinceList from '../components/province/ProvinceList';
-import { Province, Country, ProvinceAdd } from '../types/country';
+import ProvinceForm from '../../components/province/ProvinceForm';
+
+import { Province, Country, ProvinceAdd } from '../../types/country';
 
 const ProvincePage: React.FC = () => {
       const [provinces, setProvinces] = useState<Province[]>([]);
