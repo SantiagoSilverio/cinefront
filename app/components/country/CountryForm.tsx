@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { CountryAdd } from '../../types/country';
 import Link from 'next/link';
 
-import '../../country/country.css'; // Importa el archivo CSS para aplicar estilos
+
 
 interface CountryFormProps {
   country: CountryAdd | null;
