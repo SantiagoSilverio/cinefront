@@ -31,7 +31,7 @@ const EditActorPage: React.FC = () => {
 
     const fetchActor = async (actorId: number) => {
         try {
-            const response = await fetch(`http://localhost:8000/actor/${actorId}/`);
+            const response = await fetch(`https://back-k1a3.onrender.com/actor/${actorId}/`);
             if (!response.ok) {
                 throw new Error('Error fetching actor');
             }
@@ -49,7 +49,7 @@ const EditActorPage: React.FC = () => {
             if (!actor) {
                 throw new Error('Actor data is not available');
             }
-            const response = await fetch(`http://localhost:8000/actor/${actor.id}/`, {
+            const response = await fetch(`https://back-k1a3.onrender.com/actor/${actor.id}/`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

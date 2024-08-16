@@ -21,7 +21,7 @@ const ActorsPage: React.FC = () => {
 
       const fetchActors = async (page: number) => {
             try {
-                  const response = await fetch(`http://localhost:8000/actor/?page=${page}`);
+                  const response = await fetch(`https://back-k1a3.onrender.com/actor/?page=${page}`);
                   if (!response.ok) {
                         throw new Error('Error fetching actors');
                   }
@@ -35,7 +35,7 @@ const ActorsPage: React.FC = () => {
 
       const deleteActor = async (id: number) => {
             try {
-                  const response = await fetch(`http://localhost:8000/actor/${id}/`, {
+                  const response = await fetch(`https://back-k1a3.onrender.com/actor/${id}/`, {
                         method: 'DELETE',
                   });
                   if (!response.ok) {

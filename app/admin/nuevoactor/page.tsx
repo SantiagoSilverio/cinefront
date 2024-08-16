@@ -12,7 +12,7 @@ const NewActorPage: React.FC = () => {
 
       const addActor = async (actor: ActorAdd) => {
             try {
-                  const response = await fetch('http://localhost:8000/actor/', {
+                  const response = await fetch('https://back-k1a3.onrender.com/actor/', {
                         method: 'POST',
                         headers: {
                               'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const NewActorPage: React.FC = () => {
                               <ActorForm onSave={handleAdd} />
                         </div>
                   </main>
-                  <Footer />
+
             </div>
       );
 };
