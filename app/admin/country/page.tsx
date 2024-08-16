@@ -103,7 +103,7 @@ const CountrysPage: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+
       <main className="flex-grow container mx-auto p-4">
         <h1 className="title">Agregar nuevo país</h1>
         <div className="form-container">
@@ -114,7 +114,7 @@ const CountrysPage: React.FC = () => {
           
         </div>
       </main>
-      <Footer />
+
     </div>
   );
 };

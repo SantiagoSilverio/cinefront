@@ -126,7 +126,7 @@ const ProvincePage: React.FC = () => {
 
       return (
             <div className="flex flex-col min-h-screen">
-                  <Navbar />
+
                   <h1>Provincias</h1>
                   <ProvinceForm
                         province={editingProvince}
@@ -159,7 +159,6 @@ const ProvincePage: React.FC = () => {
                   <Link href="/">
                         <button>Volver</button>
                   </Link>
-                  <Footer />
             </div>
       );
 };

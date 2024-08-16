@@ -71,7 +71,7 @@ const EditActorPage: React.FC = () => {
 
     return (
         <div className="flex flex-col min-h-screen">
-            <Navbar />
+
             <main className="flex-grow container mx-auto p-4">
                 <h1 className="title">Editar actor</h1>
                 <div className="form-container">
@@ -85,7 +85,7 @@ const EditActorPage: React.FC = () => {
 
                 </div>
             </main>
-            <Footer />
+
         </div>
     );
 };

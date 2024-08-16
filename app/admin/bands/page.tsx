@@ -104,13 +104,13 @@ const BandsPage: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+
       <main className="flex-grow container mx-auto p-4">
         <h1 className="mt-8-title">Bands</h1>
         <BandForm band={editingBand ? { title: editingBand.title, composer: editingBand.composer } : null} onSave={editingBand ? handleUpdate : handleAdd} />
         <BandList bands={bands} onEdit={handleEdit} onDelete={handleDelete} />
       </main>
-      <Footer />
+
     </div>
 
   );
