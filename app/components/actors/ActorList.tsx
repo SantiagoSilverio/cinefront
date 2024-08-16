@@ -3,15 +3,14 @@ import Link from 'next/link';
 import { Actor } from '../../types/actors';
 import '../../admin/actors/actors.css';
 
-interface ActorListProps {
+type ActorListProps = {
     actors: Actor[];
-    onEdit: (actor: Actor) => JSX.Element;
+    onEdit: (actor: Actor) => React.ReactNode;
     onDelete: (id: number) => void;
-    onSort: (column: keyof Actor) => void;
-    sortColumn: keyof Actor | null;
+    onSort: (column: string) => void;
+    sortColumn: string | null;
     sortOrder: 'asc' | 'desc';
-  }
-  
+  };
   
 
 const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortColumn, sortOrder }) => {
@@ -38,6 +37,9 @@ const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortCol
                         </button>
                     </th>
                     <th>Acciones</th>
+                    <th >
+                        Estado
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -45,7 +47,6 @@ const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortCol
                     <tr key={actor.id}>
                         <td>{actor.id}</td>
                         <td>{actor.name}</td>
-                        <td>{actor.state ? 'Activo' : 'Inactivo'}</td>
                         <td>
                             <Link href={`/editaractor/${actor.id}`}>
                                 <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
@@ -56,6 +57,7 @@ const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortCol
                                 Eliminar
                             </button>
                         </td>
+                        <td>{actor.state ? 'Activo' : 'Inactivo'}</td>
                     </tr>
                 ))}
             </tbody>
