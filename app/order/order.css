@@ -1,0 +1,115 @@
+.order-container {
+    min-height: 100vh; /* Cambio a min-height */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .order-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+    top: 20px;
+  }
+  
+  .order-title {
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .order-back-arrow {
+    cursor: pointer;
+    fill: #ffffff;
+    position: absolute;
+    left: 20px;
+    top: 0;
+  }
+  
+  .order-box {
+    background-color: white;
+    border-radius: 10px;
+    width: 700px;
+    padding: 20px;
+    text-align: center;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto; /* Centrar verticalmente */
+    margin-top: 50px;
+  }
+  
+  .order-details {
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+    margin-top: 80px; /* Espacio para evitar superposición */
+  }
+  
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid white;
+
+  }
+  
+  .order-table td {
+    padding: 20px;
+    color: #ffffff;
+    font-weight: bold;
+  }
+  
+   .order-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .order-table tr:nth-child(odd) {
+    background-color: #4AB4A3;
+  }
+  
+  .order-table tr:nth-child(even) {
+    background-color: #c4c1c1;
+  }
+  
+  
+  .order-finish-button {
+    background-color: #f06292;
+    color: white;
+    padding: 10px 20px; /* Botón más pequeño */
+    border: none;
+    width: 300px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 75px;
+    align-self: center; /* Centrar horizontalmente */
+  }
+  
+  .order-finish-button:hover {
+    background-color: #e91e63;
+  }
+  
+  /* Navbar y Footer */
+  .flex {
+    display: flex;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  
+  .flex-grow {
+    flex-grow: 1;
+  }
+  

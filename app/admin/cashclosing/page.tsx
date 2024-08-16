@@ -1,0 +1,1 @@
+//Pagina donde se puede hacer el cierre de caja

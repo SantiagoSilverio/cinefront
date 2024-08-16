@@ -1,0 +1,21 @@
+name: Backup to cinefront Repository
+
+on:
+  push:
+    branches:
+      - desarrollo
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Mirror-push to backup repository
+      env:
+        PERSONAL_REPO_TOKEN: ${{ secrets.PERSONAL_REPO_TOKEN }}
+      run: |
+        git remote add backup https://<PERSONAL_REPO_TOKEN>@github.com/SantiagoSilverio/cinefront.git
+        git push --mirror backup
