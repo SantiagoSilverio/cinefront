@@ -5,7 +5,6 @@ import '../../admin/actors/actors.css';
 
 type ActorListProps = {
     actors: Actor[];
-    onEdit: (actor: Actor) => React.ReactNode;
     onDelete: (id: number) => void;
     onSort: (column: keyof Actor) => void;
     sortColumn: keyof Actor | null;
