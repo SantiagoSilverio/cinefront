@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Footer from '../components/footer/Footer';
-import Navbar from '../components/navbar/Navbar';
-import CountryForm from '../components/country/CountryForm';
-import CountryList from '../components/country/CountryList';
-import { Country, CountryAdd } from '../types/country';
+
+import CountryForm from '../../components/country/CountryForm';
+import CountryList from '../../components/country/CountryList';
+import { Country, CountryAdd } from '../../types/country';
 import '../country/country.css';
 
 const CountrysPage: React.FC = () => {
