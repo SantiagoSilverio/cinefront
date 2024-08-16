@@ -2,7 +2,7 @@ export interface ActorAdd {
       name: string;
 }
 export interface Actor {
-      state: ReactNode;
+      state: string;
       id:number;
       name: string;
 }
