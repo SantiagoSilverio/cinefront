@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       return (
             <html lang="en">
+                  
                   <body className={inter.className}>
                         <div className="flex">
                               <Sidebar />
