@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Footer from '../components/footer/Footer';
-import Navbar from '../components/navbar/Navbar';
-import BandForm from '../components/bands/BandForm';
-import BandList from '../components/bands/BandList';
+
+import BandForm from '../../components/bands/BandForm';
+import BandList from '../../components/bands/BandList';
 import Link from 'next/link';
-import { Band, BandAdd } from '../types/bands';
+import { Band, BandAdd } from '../../types/bands';
 import '../bands/bands.css';
 
 const BandsPage: React.FC = () => {
@@ -111,9 +110,9 @@ const BandsPage: React.FC = () => {
         <BandForm band={editingBand ? { title: editingBand.title, composer: editingBand.composer } : null} onSave={editingBand ? handleUpdate : handleAdd} />
         <BandList bands={bands} onEdit={handleEdit} onDelete={handleDelete} />
       </main>
-        <Footer />
+      <Footer />
     </div>
-    
+
   );
 };
 
