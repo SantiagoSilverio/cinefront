@@ -21,7 +21,7 @@ const ActorsPage: React.FC = () => {
 
       const fetchActors = async (page: number) => {
             try {
-                  const response = await fetch(`https://back-k1a3.onrender.com/actor/?page=${page}`);
+                  const response = await fetch(`https://back-k1a3.onrender.com/actor/`);
                   if (!response.ok) {
                         throw new Error('Error fetching actors');
                   }
