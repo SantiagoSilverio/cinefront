@@ -75,7 +75,7 @@ const ProvincePage: React.FC = () => {
                         },
                         body: JSON.stringify({
                               name: province.name,
-                              country: province.country.id, 
+                              country: province.country.id,
                         }),
                   });
                   if (!response.ok) {
