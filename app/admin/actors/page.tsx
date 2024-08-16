@@ -67,17 +67,18 @@ const ActorsPage: React.FC = () => {
             fetchActors(currentPage);
       };
 
-      const handleSort = (column: string) => {
+      const handleSort = (column: keyof Actor) => {
             const order = sortColumn === column && sortOrder === 'asc' ? 'desc' : 'asc';
             setSortOrder(order);
             setSortColumn(column);
             const sortedActors = [...actors].sort((a, b) => {
-                  if (a[column as keyof Actor] < b[column as keyof Actor]) return order === 'asc' ? -1 : 1;
-                  if (a[column as keyof Actor] > b[column as keyof Actor]) return order === 'asc' ? 1 : -1;
-                  return 0;
+              if (a[column] < b[column]) return order === 'asc' ? -1 : 1;
+              if (a[column] > b[column]) return order === 'asc' ? 1 : -1;
+              return 0;
             });
             setActors(sortedActors);
-      };
+          };
+          
 
 
       const handlePageChange = (page: number) => {
@@ -126,10 +127,11 @@ const ActorsPage: React.FC = () => {
                                                 actors={filteredActors}
                                                 onEdit={handleEdit}
                                                 onDelete={handleDelete}
-                                                onSort={handleSort as (column: string) => void} // Casting here
+                                                onSort={handleSort}
                                                 sortColumn={sortColumn}
                                                 sortOrder={sortOrder}
                                           />
+
 
                                           <Pagination
                                                 currentPage={currentPage}
