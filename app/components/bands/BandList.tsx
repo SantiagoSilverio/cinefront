@@ -1,6 +1,6 @@
 import React from 'react';
 import { Band } from '../../types/bands';
-import '../../bands/bands.css';
+
 
 interface BandListProps {
   bands: Band[];

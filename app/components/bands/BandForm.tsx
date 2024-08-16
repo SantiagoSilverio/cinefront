@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BandAdd } from '../../types/bands';
-import '../../bands/bands.css';
+
 import Link from 'next/link';
 
 interface BandFormProps {
