@@ -3,13 +3,15 @@ import Link from 'next/link';
 import { Actor } from '../../types/actors';
 import '../../admin/actors/actors.css';
 
-interface ActorListProps {
+type ActorListProps = {
     actors: Actor[];
+    onEdit: (actor: Actor) => React.ReactNode;
     onDelete: (id: number) => void;
-    onSort: (column: string) => void;
-    sortColumn: string | null;
+    onSort: (column: keyof Actor) => void;
+    sortColumn: keyof Actor | null;
     sortOrder: 'asc' | 'desc';
-}
+  };
+  
 
 const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortColumn, sortOrder }) => {
     return (

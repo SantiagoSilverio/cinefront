@@ -78,6 +78,7 @@ const ActorsPage: React.FC = () => {
             });
             setActors(sortedActors);
           };
+          
 
       const handlePageChange = (page: number) => {
             setCurrentPage(page);
