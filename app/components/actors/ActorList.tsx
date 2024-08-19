@@ -30,12 +30,6 @@ const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortCol
                             {sortColumn === 'name' ? (sortOrder === 'asc' ? '↓' : '↑') : '↕'}
                         </button>
                     </th>
-                    <th>
-                        Estado
-                        <button onClick={() => onSort('state')}>
-                            {sortColumn === 'state' ? (sortOrder === 'asc' ? '↓' : '↑') : '↕'}
-                        </button>
-                    </th>
                     <th>Acciones</th>
                     <th >
                         Estado
@@ -57,7 +51,7 @@ const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortCol
                                 Eliminar
                             </button>
                         </td>
-                        <td>{actor.state ? 'Activo' : 'Inactivo'}</td>
+                        <td className="new-actor-td"></td>
                     </tr>
                 ))}
             </tbody>

@@ -2,7 +2,6 @@ export interface ActorAdd {
       name: string;
 }
 export interface Actor {
-      id: number;
+      id:number;
       name: string;
-      state: boolean; 
 }
