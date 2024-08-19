@@ -13,7 +13,7 @@ type ActorListProps = {
   };
   
 
-const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortColumn, sortOrder }) => {
+  const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortColumn, sortOrder }) => {
     return (
         <table className="table-margin table-striped table-centered">
             <thead>
@@ -30,10 +30,13 @@ const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortCol
                             {sortColumn === 'name' ? (sortOrder === 'asc' ? '↓' : '↑') : '↕'}
                         </button>
                     </th>
-                    <th>Acciones</th>
-                    <th >
+                    <th>
                         Estado
+                        <button onClick={() => onSort('state')}>
+                            {sortColumn === 'state' ? (sortOrder === 'asc' ? '↓' : '↑') : '↕'}
+                        </button>
                     </th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +44,7 @@ const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortCol
                     <tr key={actor.id}>
                         <td>{actor.id}</td>
                         <td>{actor.name}</td>
+                        <td>{actor.state ? 'Activo' : 'Inactivo'}</td>
                         <td>
                             <Link href={`/editaractor/${actor.id}`}>
                                 <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
@@ -51,7 +55,6 @@ const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortCol
                                 Eliminar
                             </button>
                         </td>
-                        <td className="new-actor-td"></td>
                     </tr>
                 ))}
             </tbody>
