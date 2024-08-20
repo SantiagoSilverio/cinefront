@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
       images: {
-            domains: ['via.placeholder.com'],
-            },
-      };
-      
-      export default nextConfig;
-      
+        domains: ['image.tmdb.org'], // Agrega este dominio
+      },
+    };
+
+    export default nextConfig;
