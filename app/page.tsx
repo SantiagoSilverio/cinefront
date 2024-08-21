@@ -7,10 +7,17 @@ import MovieCarousel from './components/carousel/Carousel';
 import UpcomingReleases from './components/upcomingreleases/UpcomingReleases';
 import { getCurrentMovies, getUpcomingMovies } from './api/movies';
 
-export default function Home() {
-  const [currentMovies, setCurrentMovies] = useState([]);
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
 
+export default function Home() {
+  const [currentMovies, setCurrentMovies] = useState<Movie[]>([]);
+  const [upcomingMovies, setUpcomingMovies] = useState<Movie[]>([]);
+
+interface Movie {
+  id: number;
+  title: string;
+  backdrop_path: string;
+  poster_path: string;
+}
   useEffect(() => {
     async function fetchMovies() {
       const currentMoviesData = await getCurrentMovies();
