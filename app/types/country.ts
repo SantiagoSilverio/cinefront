@@ -4,6 +4,7 @@ export interface CountryAdd {
 export interface Country {
       id:number;
       name: string;
+      state: boolean;
 }
 
 export interface ProvinceAdd {
