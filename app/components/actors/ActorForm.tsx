@@ -34,8 +34,8 @@ const ActorForm: React.FC<ActorFormProps> = ({ actor, onSave }) => {
                   />
 
                   <div className="button-container1">
-                        <Link href="/actors">
-                              <button className="btn">Cancelar</button>
+                        <Link href="/admin/actors">
+                              <button className="btn">Ir a la lista</button>
                         </Link>
                         <button type="submit" className="submit-button">Guardar</button>
                   </div>

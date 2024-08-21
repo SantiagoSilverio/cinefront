@@ -89,11 +89,11 @@ th {
 }
 
 .sidebar-container {
-  width: 13%; /* Ancho fijo para la barra lateral */
+
   min-height: calc(100vh - 1110px); /* Ajusta la altura de la barra lateral para ocupar toda la pantalla menos el navbar */
   position: absolute; /* Fija la barra lateral en su lugar */
   top: 56px; /* Alinea la barra lateral debajo del navbar */
-  border-right: 1px solid #ddd; /* Borde derecho de la barra lateral (opcional) */
+
   z-index: 1000; /* Asegura que la barra lateral esté debajo del navbar */
 }
 
@@ -143,7 +143,7 @@ th {
 }
 
 footer {
-  margin-top: auto; /* Empuja el footer hacia el final del contenedor principal */
+
   width: 100%; /* Asegura que el footer ocupe todo el ancho */
 }
 
