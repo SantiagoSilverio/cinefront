@@ -43,16 +43,14 @@ const UsersPage: React.FC = () => {
                   if (!response.ok) {
                         throw new Error('Error deleting user');
                   }
-                  setUsers(users.map(user => user.id === id ? { ...user, is_active: false } : user));
+                  setUsers(prevUsers => prevUsers.filter(user => user.id !== id));
             } catch (error) {
                   console.error('Failed to delete user:', error);
             }
       };
       const handleEdit = (user: User) => {
             return (
-                  <Link href={`/admin/editaruser/${user.id}`}>
-                        <a>Editar</a>
-                  </Link>
+                  window.location.href = `/admin/editaruser/${user.id}`
             );
       };
       const handleDelete = (id: number) => {
@@ -118,7 +116,7 @@ const UsersPage: React.FC = () => {
                                     totalPages={totalPages}
                                     onPageChange={handlePageChange}
                               />
-                              <Link href="/">
+                              <Link href="/admin">
                                     <button className="bg-gray-300 text-gray-700 rounded-md px-3 py-2 hover:bg-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300">
                                           Volver
                                     </button>

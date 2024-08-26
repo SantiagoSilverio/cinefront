@@ -46,9 +46,6 @@ html, body, #__next {
 .user-form {
       display: grid;
       grid-template-columns: 1fr 1fr; /* Dos columnas de igual ancho */
-      gap: 16px;
-      width: 100%;
-      color: black;
 }
 
 .input-field {

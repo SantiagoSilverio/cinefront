@@ -5,7 +5,6 @@ import '../../admin/country/country.css';
 
 interface CountryListProps {
     countries: Country[];
-    onEdit: (country: Country ) => React.ReactNode;
     onDelete: (id: number) => void;
     onSort: (column: string) => void;
     sortColumn: string | null;

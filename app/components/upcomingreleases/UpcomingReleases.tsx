@@ -23,10 +23,10 @@ const UpcomingReleases: React.FC<{ posters: { src: string; alt: string }[] }> = 
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
+      <div className="rounded-lg grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {currentPosters.map((poster, index) => (
-          <div key={index} className="w-full h-auto">
-            <Image src={poster.src} alt={poster.alt} width={300} height={450} />
+          <div key={index} className="w-72 h-auto rounded-lg overflow-hidden">
+            <Image src={poster.src} alt={poster.alt} width={200} height={350} layout="responsive" className="rounded-lg" />
           </div>
         ))}
       </div>
@@ -35,7 +35,8 @@ const UpcomingReleases: React.FC<{ posters: { src: string; alt: string }[] }> = 
           <button
             key={number}
             onClick={() => handleClick(number)}
-            className={`mx-1 px-3 py-1 border rounded ${currentPage === number ? 'bg-gray-300' : 'bg-white'}`}
+            aria-label={`Go to page ${number}`}
+            className={`mx-1 px-3 py-1 border rounded-lg mb-4  ${currentPage === number ? 'bg-[#D5447B] text-white' : 'bg-gray-200 text-gray-600'}`}
           >
             {number}
           </button>

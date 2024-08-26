@@ -17,14 +17,16 @@
 }
 
 html, body {
-  height: 100%;
+  
   margin: 0; /* Asegura que no haya márgenes predeterminados */
 }
 
 body {
+
   font-family: 'Inter', sans-serif;
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to top, #FFFFFF, #D9D9D9, #4AB4A3);
+  background: linear-gradient(to top, #FFFFFF, #4AB4A3);
+
 }
 
 @layer utilities {

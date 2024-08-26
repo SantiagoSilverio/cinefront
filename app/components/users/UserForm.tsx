@@ -29,15 +29,15 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
             const fetchOptions = async () => {
                   try {
                         const [citiesResponse, rolesResponse] = await Promise.all([
-                              fetch('/api/cities'),
-                              fetch('/api/roles')
+                              fetch('https://back-k1a3.onrender.com/city/'),
+                              fetch('https://back-k1a3.onrender.com/role/')
                         ]);
 
                         const citiesData = await citiesResponse.json();
                         const rolesData = await rolesResponse.json();
 
-                        setCities(citiesData);
-                        setRoles(rolesData);
+                        setCities(citiesData.results);
+                        setRoles(rolesData.results);
                   } catch (error) {
                         console.error('Error fetching cities and roles:', error);
                   }
@@ -58,7 +58,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
       };
 
       return (
-            <form onSubmit={handleSubmit} className="user-form">
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 w-full">
                   <div className="input-field">
                         <input
                               type="text"
@@ -66,6 +66,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
                               onChange={(e) => setFirstName(e.target.value)}
                               placeholder="Nombre"
                               required
+                              className="w-full p-2 border border-gray-300 rounded-md"
                         />
                   </div>
                   <div className="input-field">
@@ -75,6 +76,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
                               onChange={(e) => setLastName(e.target.value)}
                               placeholder="Apellido"
                               required
+                              className="w-full p-2 border border-gray-300 rounded-md"
                         />
                   </div>
                   <div className="input-field">
@@ -84,6 +86,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
                               onChange={(e) => setPhone(e.target.value)}
                               placeholder="Teléfono"
                               required
+                              className="w-full p-2 border border-gray-300 rounded-md"
                         />
                   </div>
                   <div className="input-field">
@@ -93,6 +96,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
                               onChange={(e) => setEmail(e.target.value)}
                               placeholder="Correo electrónico"
                               required
+                              className="w-full p-2 border border-gray-300 rounded-md"
                         />
                   </div>
                   <div className="input-field">
@@ -102,15 +106,17 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
                               onChange={(e) => setPassword(e.target.value)}
                               placeholder="Contraseña"
                               required
+                              className="w-full p-2 border border-gray-300 rounded-md"
                         />
                   </div>
-                  <div className="input-field full-width">
+                  <div className="input-field col-span-2">
                         <input
                               type="text"
                               value={address}
                               onChange={(e) => setAddress(e.target.value)}
                               placeholder="Dirección"
                               required
+                              className="w-full p-2 border border-gray-300 rounded-md"
                         />
                   </div>
                   <div className="input-field">
@@ -118,6 +124,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
                               value={cityName}
                               onChange={(e) => setCityName(e.target.value)}
                               required
+                              className="w-full p-2 border border-gray-300 rounded-md"
                         >
                               <option value="">Selecciona una ciudad</option>
                               {cities.map((city) => (
@@ -130,6 +137,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
                               value={roleName}
                               onChange={(e) => setRoleName(e.target.value)}
                               required
+                              className="w-full p-2 border border-gray-300 rounded-md"
                         >
                               <option value="">Selecciona un rol</option>
                               {roles.map((role) => (
@@ -137,12 +145,15 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
                               ))}
                         </select>
                   </div>
-
-                  <div className="button-container1">
+                  <div className="col-span-2 flex justify-between mt-4">
                         <Link href="/admin/users">
-                              <button type="button" className="btn">Cancelar</button>
+                              <button type="button" className="bg-gray-500 text-white rounded-md px-4 py-2 hover:bg-gray-700">
+                                    Cancelar
+                              </button>
                         </Link>
-                        <button type="submit" className="submit-button">Guardar</button>
+                        <button type="submit" className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-700">
+                              Guardar
+                        </button>
                   </div>
             </form>
       );

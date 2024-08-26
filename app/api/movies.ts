@@ -7,7 +7,7 @@ export async function getCurrentMovies() {
   const response = await axios.get(`${BASE_URL}/movie/now_playing`, {
     params: {
       api_key: API_KEY,
-      language: 'es-ES', // O el idioma que prefieras
+      language: 'es-MX', // O el idioma que prefieras
     },
   });
   return response.data.results;
@@ -17,7 +17,7 @@ export async function getUpcomingMovies() {
   const response = await axios.get(`${BASE_URL}/movie/upcoming`, {
     params: {
       api_key: API_KEY,
-      language: 'es-ES',
+      language: 'es-MX',
     },
   });
   return response.data.results;
