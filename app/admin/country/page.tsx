@@ -36,7 +36,7 @@ const CountryPage: React.FC = () => {
       const deleteCountry = async (id: number) => {
             try {
                   const response = await fetch(`https://back-k1a3.onrender.com/country/${id}/`, {
-                        method: 'PATCH', 
+                        method: 'PATCH',
                         headers: {
                               'Content-Type': 'application/json',
                         },
@@ -72,9 +72,9 @@ const CountryPage: React.FC = () => {
             setSortOrder(order);
             setSortColumn(column);
             const sortedCountries = [...countries].sort((a, b) => {
-              if (a[column as keyof Country] < b[column as keyof Country]) return order === 'asc' ? -1 : 1;
-              if (a[column as keyof Country] > b[column as keyof Country]) return order === 'asc' ? 1 : -1;
-              return 0;
+                  if (a[column as keyof Country] < b[column as keyof Country]) return order === 'asc' ? -1 : 1;
+                  if (a[column as keyof Country] > b[column as keyof Country]) return order === 'asc' ? 1 : -1;
+                  return 0;
             });
             setCountries(sortedCountries);
       };
@@ -103,7 +103,7 @@ const CountryPage: React.FC = () => {
                                                 <div className="new-country-button-container">
                                                       <Link href="/admin/nuevocountry">
                                                             <button className="new-country-button">
-                                                            <svg width="80px" height="80px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                  <svg width="80px" height="80px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                         <path fillRule="evenodd" clipRule="evenodd" d="M1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12ZM12.5 5.5C13.0523 5.5 13.5 5.94772 13.5 6.5V10.5H17.5C18.0523 10.5 18.5 10.9477 18.5 11.5V12.5C18.5 13.0523 18.0523 13.5 17.5 13.5H13.5V17.5C13.5 18.0523 13.0523 18.5 12.5 18.5H11.5C10.9477 18.5 10.5 18.0523 10.5 17.5V13.5H6.5C5.94772 13.5 5.5 13.0523 5.5 12.5V11.5C5.5 10.9477 5.94772 10.5 6.5 10.5H10.5V6.5C10.5 5.94772 10.9477 5.5 11.5 5.5H12.5Z" fill="#ffffff"></path>
                                                                   </svg>
                                                             </button>
@@ -124,12 +124,12 @@ const CountryPage: React.FC = () => {
 
                                           <CountryList
                                                 countries={filteredCountries}
-                                                onEdit={handleEdit}
                                                 onDelete={handleDelete}
                                                 onSort={handleSort}
                                                 sortColumn={sortColumn}
                                                 sortOrder={sortOrder}
                                           />
+
                                           <Pagination
                                                 currentPage={currentPage}
                                                 totalPages={totalPages}
