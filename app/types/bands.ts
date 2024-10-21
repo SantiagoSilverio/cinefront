@@ -3,7 +3,9 @@ export interface BandAdd {
       composer: string;
 }
 export interface Band {
-      id:number;
+      id: number;
       title: string;
       composer: string;
-}
+      state: boolean; 
+  }
+  

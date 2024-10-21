@@ -44,7 +44,7 @@ body {
 .container {
   transition: transform 0.3s ease-in-out;
   display: flex;
-  width: 100%; /* Ensure the container can hold both sections side by side */
+  width: 100%;
 }
 
 .container.slide-right {

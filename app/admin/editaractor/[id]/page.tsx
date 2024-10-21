@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import ActorForm from '../../../components/actors/ActorForm';
 import Link from 'next/link';
 import { Actor } from '../../../types/actors';
-import '../../nuevoactor/nuevoactor.css'; // Usa el mismo CSS que para la otra página
+
 
 const EditActorPage: React.FC = () => {
     const router = useRouter();

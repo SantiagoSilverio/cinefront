@@ -1,66 +1,63 @@
 import React, { useState, useEffect } from 'react';
-import { Province, ProvinceAdd, Country } from '../../types/country';
+import { ProvinceAdd, Province, Country } from '../../types/country';
+import Link from 'next/link';
 
 interface ProvinceFormProps {
-  province: Province | null;
-  countrys: Country[];
-  onSave: (province: ProvinceAdd | Province) => void;
+    province?: Province;
+    countries: Country[];
+    onSave: (province: ProvinceAdd) => void;
 }
 
-const ProvinceForm: React.FC<ProvinceFormProps> = ({ province, countrys, onSave }) => {
-  const [name, setName] = useState(province?.name || '');
-  const [country, setCountry] = useState<number | string>(province?.country?.id || '');
+const ProvinceForm: React.FC<ProvinceFormProps> = ({ province, countries, onSave }) => {
+    const [name, setName] = useState(province ? province.name : '');
+    const [countryId, setCountryId] = useState(province ? province.country.id : '');
 
-  useEffect(() => {
-    if (province) {
-      setName(province.name);
-      setCountry(province.country.id);
-    }
-  }, [province]);
+    useEffect(() => {
+        if (province) {
+            setName(province.name);
+            setCountryId(province.country.id);
+        }
+    }, [province]);
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    const provinceData: ProvinceAdd = {
-      name,
-      country: country ? parseInt(country.toString(), 10) : 0, // Ensure country is a number
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        onSave({ name, country: Number(countryId) });
+        setName('');
+        setCountryId('');
     };
 
-    console.log('Submitting province data:', provinceData);
+    return (
+        <form onSubmit={handleSubmit} className="province-form">
+            <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Nombre de la provincia"
+                required
+                className="input-field"
+            />
+            <select
+                value={countryId}
+                onChange={(e) => setCountryId(e.target.value)}
+                required
+                className="input-field"
+            >
+                <option value="">Seleccione un país</option>
+                {countries.map((country) => (
+                    <option key={country.id} value={country.id}>
+                        {country.name}
+                    </option>
+                ))}
+            </select>
 
-    if (province && province.id) {
-      onSave({ ...provinceData, id: province.id }); // Add id if it exists
-    } else {
-      onSave(provinceData);
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Nombre de la Provincia</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>País</label>
-        <select
-          value={country}
-          onChange={(e) => setCountry(parseInt(e.target.value, 10))} // Ensure value is an integer
-        >
-          <option value="">Seleccione un país</option>
-          {countrys.map((country) => (
-            <option key={country.id} value={country.id}>
-              {country.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <button type="submit">Guardar</button>
-    </form>
-  );
+            <div className="button-container1">
+                <Link href="/admin/province">
+                    <button className="btn">Ir a la lista</button>
+                </Link>
+                <button type="submit" className="submit-button">Guardar</button>
+            </div>
+        </form>
+    );
 };
 
 export default ProvinceForm;

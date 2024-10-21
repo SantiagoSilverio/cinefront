@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import Footer from './components/footer/Footer';
-import Navbar from './components/navbar/Navbar';
 import MovieCarousel from './components/carousel/Carousel';
 import UpcomingReleases from './components/upcomingreleases/UpcomingReleases';
 import { getCurrentMovies, getUpcomingMovies } from './api/movies';
@@ -34,7 +32,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen  overflow-y-scroll">
       <main className="flex-grow flex flex-col items-center justify-between">
         <MovieCarousel
           logos={currentMovies.map(movie => ({

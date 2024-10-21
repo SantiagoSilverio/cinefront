@@ -25,7 +25,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ posters, logos }) => {
       autoPlay 
       interval={10000} 
       transitionTime={1000} 
-      showArrows={true} // Mostrar flechas de navegación
+      showArrows={true} 
       renderArrowPrev={(onClickHandler, hasPrev, label) =>
         hasPrev && (
           <button 
@@ -61,33 +61,31 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ posters, logos }) => {
           onClick={() => handleClick(poster.id)}
         >
           
-          {/* Imagen del fondo */}
           <Image 
-            src={logos[index]?.src || '/path/to/default/image.jpg'} // Proporciona una imagen predeterminada
+            src={logos[index]?.src || '/path/to/default/image.jpg'} 
             alt={logos[index]?.alt || 'Default Alt Text'} 
             width={2020} 
             height={0} 
-            className="object-cover w-full h-full absolute z-0 blur-0 shadow-black" // Añadir clase de sombra
+            className="object-cover w-full h-full absolute z-0 blur-0 shadow-black" 
           />
 
-          {/* Degradado negro */}
           <div className="absolute w-full h-full bg-gradient-to-r from-black to-transparent z-10"></div>
 
-          {/* Poster de la película */}
           <Image 
             src={poster.src} 
             alt={poster.alt} 
             width={500} 
             height={0} 
-            className="object-contain z-20 " 
-            style={{ width: '20%', height: 'auto', borderRadius: '10px', marginLeft: '30px', marginTop:'30px', marginBottom: '30px'  }} // Ajusta el tamaño según sea necesario
+            className="object-contain z-20" 
+            style={{ width: '18%', height: 'auto', borderRadius: '10px', marginLeft: '30px', marginTop:'30px', marginBottom: '30px' }} 
           />
-          {/* Título de la película */}
+
           <h1 className="text-white font-bold text-4xl z-10 ml-4" style={{ marginTop: '-15%' }}>{poster.alt}</h1>
           
-          {/* Contenedor del overview alineado a la derecha */}
-          <div className="absolute text-left z-10 " style={{ width: '40%', left: '23%' }}>
-            <h4 className="text-white font-semibold text-xs" style={{marginTop: '-9%'}}>{poster.overview}</h4>
+          <div className="absolute text-left z-10" style={{ width: '50%', left: '21%' }}>
+            <h4 className="text-white font-semibold text-xs overflow-hidden" style={{ marginTop: '-5%', height: '10em', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3, overflow: 'hidden' }}>
+              {poster.overview}
+            </h4>
           </div>
         </div>
       ))}

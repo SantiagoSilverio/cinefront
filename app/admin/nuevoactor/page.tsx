@@ -1,22 +1,24 @@
 "use client";
 
 import React, { useState } from 'react';
-import Footer from '../../components/footer/Footer';
-import Navbar from '../../components/navbar/Navbar';
 import ActorForm from '../../components/actors/ActorForm';
-import Link from 'next/link';
+import Cookies from 'js-cookie';
 import { ActorAdd } from '../../types/actors';
-import '../nuevoactor/nuevoactor.css'; 
+import '../nuevoactor/nuevoactor.css';
+
 const NewActorPage: React.FC = () => {
       const [actors, setActors] = useState<ActorAdd[]>([]);
 
       const addActor = async (actor: ActorAdd) => {
             try {
+                  const token = Cookies.get('access_token');
+                  const myHeaders = new Headers();
+                  myHeaders.append("Authorization", `Bearer ${token}`);
+                  myHeaders.append("Content-Type", "application/json");
+
                   const response = await fetch('https://back-k1a3.onrender.com/actor/', {
                         method: 'POST',
-                        headers: {
-                              'Content-Type': 'application/json',
-                        },
+                        headers: myHeaders,
                         body: JSON.stringify(actor),
                   });
                   if (!response.ok) {
@@ -35,11 +37,10 @@ const NewActorPage: React.FC = () => {
       };
 
       return (
-            <div className="flex flex-col min-h-screen">
-
-                  <main className="flex-grow container mx-auto p-4">
-                        <h1 className="title">Agregar nuevo actor</h1>
-                        <div className="form-container">
+            <div id="new-actor-page" className="flex flex-col min-h-screen">
+                  <main id="new-actor-content" className="flex-grow container mx-auto p-4">
+                        <h1 id="new-actor-title" className="title">Agregar nuevo actor</h1>
+                        <div id="new-actor-form-container" className="form-container">
                               <ActorForm onSave={handleAdd} />
                         </div>
                   </main>

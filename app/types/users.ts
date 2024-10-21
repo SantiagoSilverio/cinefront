@@ -1,4 +1,5 @@
 export interface UserAdd {
+      username: string;
       first_name: string;
       last_name: string;
       phone: string;
@@ -6,11 +7,11 @@ export interface UserAdd {
       password: string;
       address: string;
       city: string;
-      role: string;
 }
 
 export interface User {
       id: number;
+      username: string;
       first_name: string;
       last_name: string;
       phone: string;
@@ -18,6 +19,5 @@ export interface User {
       password: string;
       address: string;
       city: string;  
-      role: string;
       state: boolean;
 }

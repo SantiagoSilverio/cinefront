@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Actor } from '../../types/actors';
-import '../../admin/actors/actors.css';
+import '../../admin/general.css';
 
 type ActorListProps = {
     actors: Actor[];
@@ -9,48 +9,48 @@ type ActorListProps = {
     onSort: (column: string) => void;
     sortColumn: string | null;
     sortOrder: 'asc' | 'desc';
-  };
-  
+};
 
-  const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortColumn, sortOrder }) => {
+
+const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortColumn, sortOrder }) => {
     return (
-        <table className="table-margin table-striped table-centered">
-            <thead>
+        <table id="actor-table" className="table-margin table-striped table-centered">
+            <thead id="actor-table-head">
                 <tr>
-                    <th>
+                    <th id="id-header">
                         ID
-                        <button onClick={() => onSort('id')}>
+                        <button id="id-sort-button" onClick={() => onSort('id')}>
                             {sortColumn === 'id' ? (sortOrder === 'asc' ? '↓' : '↑') : '↕'}
                         </button>
                     </th>
-                    <th>
+                    <th id="name-header">
                         Nombre
-                        <button onClick={() => onSort('name')}>
+                        <button id="name-sort-button" onClick={() => onSort('name')}>
                             {sortColumn === 'name' ? (sortOrder === 'asc' ? '↓' : '↑') : '↕'}
                         </button>
                     </th>
-                    <th>
+                    <th id="state-header">
                         Estado
-                        <button onClick={() => onSort('state')}>
+                        <button id="state-sort-button" onClick={() => onSort('state')}>
                             {sortColumn === 'state' ? (sortOrder === 'asc' ? '↓' : '↑') : '↕'}
                         </button>
                     </th>
-                    <th>Acciones</th>
+                    <th id="actions-header">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="actor-table-body">
                 {actors.map((actor) => (
                     <tr key={actor.id}>
-                        <td>{actor.id}</td>
-                        <td>{actor.name}</td>
-                        <td>{actor.state ? 'Activo' : 'Inactivo'}</td>
-                        <td>
+                        <td id="id-actor-row">{actor.id}</td>
+                        <td id="name-actor-row">{actor.name}</td>
+                        <td id="state-actor-row">{actor.state ? 'Activo' : 'Inactivo'}</td>
+                        <td id="action-actor-row">
                             <Link href={`/admin/editaractor/${actor.id}`}>
-                                <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
+                                <button id="edit-button" className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
                                     Editar
                                 </button>
                             </Link>
-                            <button onClick={() => onDelete(actor.id)} className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 focus:outline-none focus:ring-1 focus:ring-red-500">
+                            <button id="delete-button" onClick={() => onDelete(actor.id)} className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 focus:outline-none focus:ring-1 focus:ring-red-500">
                                 Eliminar
                             </button>
                         </td>
