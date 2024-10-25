@@ -20,4 +20,5 @@ export interface User {
       address: string;
       city_id?: string; // Make sure to add this line
       state?: boolean; // If applicable
+      city?: string;
 }
