@@ -50,29 +50,33 @@ const EditUserPage: React.FC = () => {
 
       const updateUser = async (updatedUser: Partial<User>) => {
             try {
-                  if (!user) {
-                        throw new Error('User data is not available');
-                  }
-                  const updatedUserData = { ...updatedUser, city_id: updatedUser.cityId };
-                  const token = Cookies.get('access_token');
-                  const myHeaders = new Headers();
-                  myHeaders.append("Authorization", `Bearer ${token}`);
-                  myHeaders.append("Content-Type", "application/json");
-
-                  const response = await fetch(`https://back-k1a3.onrender.com/user/${user.id}/`, {
-                        method: 'PUT',
-                        headers: myHeaders,
-                        body: JSON.stringify(updatedUser),
-                  });
-                  if (!response.ok) {
-                        throw new Error('Error updating User');
-                  }
-                  alert('Usuario actualizado exitosamente');
-                  router.push('/admin/users');
+                if (!user) {
+                    throw new Error('User data is not available');
+                }
+                // Usa directamente `user.city` como `city_id` si es un string o número
+                const updatedUserData = { ...updatedUser, city_id: updatedUser.city };
+                
+                const token = Cookies.get('access_token');
+                const myHeaders = new Headers();
+                myHeaders.append("Authorization", `Bearer ${token}`);
+                myHeaders.append("Content-Type", "application/json");
+        
+                const response = await fetch(`https://back-k1a3.onrender.com/user/${user.id}/`, {
+                    method: 'PUT',
+                    headers: myHeaders,
+                    body: JSON.stringify(updatedUserData),
+                });
+                if (!response.ok) {
+                    throw new Error('Error updating User');
+                }
+                alert('Usuario actualizado exitosamente');
+                router.push('/admin/users');
             } catch (error) {
-                  console.error('Failed to update user:', error);
+                console.error('Failed to update user:', error);
             }
-      };
+        };
+        
+        
 
       if (loading) {
             return <p id="loading-message">Cargando datos del usuario...</p>;
