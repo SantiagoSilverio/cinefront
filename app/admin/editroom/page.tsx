@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import RoomForm from '../../components/room/RoomForm';
 import Cookies from 'js-cookie';
 import { Room } from '../../types/room';
-import '../nuevoroom/nuevoroom.css';
+
 
 const EditRoomPage: React.FC = () => {
     const router = useRouter();

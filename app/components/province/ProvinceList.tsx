@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Province } from '../../types/country';
-import '../../admin/province/province.css';
+
 
 interface ProvinceListProps {
     provinces: Province[];

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import ReservationForm from '../../../components/reservations/ReservationForm';
 import Cookies from 'js-cookie';
