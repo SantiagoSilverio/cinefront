@@ -26,12 +26,13 @@ const ProvinceForm: React.FC<ProvinceFormProps> = ({ province, countries, onSave
             return;
         }
         // Al pasar el ID del país en `onSave`, que es lo esperado en `ProvinceAdd`
-        onSave({ name, country: Number(countryId) }); // Asegúrate de convertir a número
+        onSave({ name, countryId: Number(countryId) }); // Asegúrate de convertir a número
         if (!province) {
             setName('');
             setCountryId('');
         }
     };
+    
 
     return (
         <form onSubmit={handleSubmit} className="province-form">
