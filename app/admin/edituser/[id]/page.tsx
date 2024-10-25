@@ -53,9 +53,13 @@ const EditUserPage: React.FC = () => {
                 if (!user) {
                     throw new Error('User data is not available');
                 }
-                // Usa directamente `user.city` como `city_id` si es un string o número
-                const updatedUserData = { ...updatedUser, city_id: updatedUser.city };
                 
+                // Check if `updatedUser.city` exists and is a string or number
+                const updatedUserData = { 
+                    ...updatedUser, 
+                    city_id: typeof updatedUser.city === 'string' || typeof updatedUser.city === 'number' ? updatedUser.city : undefined 
+                };
+        
                 const token = Cookies.get('access_token');
                 const myHeaders = new Headers();
                 myHeaders.append("Authorization", `Bearer ${token}`);
@@ -75,6 +79,7 @@ const EditUserPage: React.FC = () => {
                 console.error('Failed to update user:', error);
             }
         };
+        
         
         
 
