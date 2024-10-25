@@ -51,7 +51,7 @@ const RoomList: React.FC<RoomListProps> = ({ rooms, onDelete, onSort, sortColumn
             <td>{room.seat_capacity}</td>
             <td>{room.type_screens}</td>
             <td>
-              <Link href={`/admin/editarroom/${room.id}`}>
+              <Link href={`/admin/editroom/${room.id}`}>
                 <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
                   Editar
                 </button>

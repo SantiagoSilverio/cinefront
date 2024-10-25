@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import ProvinceForm from '../../../components/province/ProvinceForm';
 import Link from 'next/link';
 import { Province, Country } from '../../../types/country';
-import '../../nuevoprovince/nuevoprovince.css';
+import '../../newactor/nuevoactor.css'; 
 
 const EditProvincePage: React.FC = () => {
     const router = useRouter();

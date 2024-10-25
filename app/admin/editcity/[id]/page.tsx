@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CityForm from '../../../components/cities/CityForm'; // Asegúrate de tener este componente
 import { City } from '../../../types/cities';
-import '../general.css';
+import '../../newactor/nuevoactor.css'; 
 
 const EditCityPage: React.FC = () => {
     const router = useRouter();

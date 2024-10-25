@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import DirectorForm from '../../../components/director/DirectorForm';
 import Link from 'next/link';
 import { Director } from '../../../types/director';
-import '../../nuevodirector/nuevodirector.css';
+import '../../newdirector/nuevodirector.css';
 
 const EditDirectorPage: React.FC = () => {
     const router = useRouter();

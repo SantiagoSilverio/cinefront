@@ -73,7 +73,7 @@ type CinemaListProps = {
                         <td>{cinema.capacity}</td>
                         <td>{cinema.state ? 'Activo' : 'Inactivo'}</td>
                         <td>
-                            <Link href={`/admin/editarcinema/${cinema.id}`}>
+                            <Link href={`/admin/editcinema/${cinema.id}`}>
                                 <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
                                     Editar
                                 </button>

@@ -40,7 +40,7 @@ const BandList: React.FC<BandListProps> = ({ bands, onDelete, onSort, sortColumn
                         <td>{band.composer}</td>
                         <td>{band.state ? 'Activo' : 'Inactivo'}</td> {/* Mostrar el estado */}
                         <td>
-                            <Link href={`/admin/editarband/${band.id}`}>
+                            <Link href={`/admin/editband/${band.id}`}>
                                 <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
                                     Editar
                                 </button>

@@ -69,7 +69,7 @@ const UserList: React.FC<UserListProps> = ({ users, onDelete, onSort, sortColumn
                                     <td id="td-phone">{user.phone}</td>
                                     <td id="td-email">{user.email}</td>
                                     <td id="td-address">{user.address}</td>
-                                    <td id="td-city">{user.city.name}</td>
+                                    <td id="td-city">{user.city ? user.city.name : 'Sin ciudad'}</td>
                                     <td id="td-state">{user.state ? 'Inactivo' : 'Activo'}</td>
                                     <td>
                                           <button

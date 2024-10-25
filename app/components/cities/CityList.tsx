@@ -43,7 +43,7 @@ const CityList: React.FC<CityListProps> = ({ cities, onDelete, onSort, sortColum
                         <td>{city.name}</td>
                         <td>{city.postal_code}</td>
                         <td>
-                            <Link href={`/admin/editarcity/${city.id}`}>
+                            <Link href={`/admin/editcity/${city.id}`}>
                                 <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
                                     Editar
                                 </button>

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ProjectionForm from '../../../components/projections/ProjectionsForm'; // Asegúrate de tener este componente
 import { Projection } from '../../../types/projections'; // Asegúrate de tener este tipo
-import '../../nuevoactor/nuevoactor.css'; // Usa el mismo CSS que para la otra página
+import '../../newactor/nuevoactor.css'; // Usa el mismo CSS que para la otra página
 
 const EditProjectionPage: React.FC = () => {
     const router = useRouter();

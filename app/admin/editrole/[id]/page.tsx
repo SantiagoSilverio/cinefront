@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import RoleForm from '../../../components/roles/RoleForm'; // Asegúrate de tener este componente creado
 import { Role } from '../../../types/roles'; // Asegúrate de que este tipo esté definido
-import '../../nuevoactor/nuevoactor.css'; // Usa el mismo CSS que para la otra página
+import '../../newactor/nuevoactor.css'; // Usa el mismo CSS que para la otra página
 
 const EditRolePage: React.FC = () => {
     const router = useRouter();

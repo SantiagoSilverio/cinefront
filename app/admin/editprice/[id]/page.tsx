@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import PriceForm from '../../../components/price/PriceForm';
 import Link from 'next/link';
 import { Price } from '../../../types/price';
-import '../../nuevoprice/nuevoprice.css'; // Usa el mismo CSS que para la otra página
+import '../../newprice/nuevoprice.css'; // Usa el mismo CSS que para la otra página
 
 const EditPricePage: React.FC = () => {
     const router = useRouter();

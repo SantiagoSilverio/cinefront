@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import DistributorForm from '../../../components/distributors/DistributorForm'; // Ajusta la ruta para distribuidores
 import { Distributor } from '../../../types/distributors';
-import '../../nuevocountry/nuevocountry.css';
+import '../../newcountry/nuevocountry.css';
 
 const EditDistributorPage: React.FC = () => {
     const router = useRouter();

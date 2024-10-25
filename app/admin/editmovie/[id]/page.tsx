@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import MovieForm from '../../../components/movie/MovieForm';
 import Link from 'next/link';
 import { Movie } from '../../../types/movie';
-import '../../nuevomovie/nuevomovie.css'; // Usa el mismo CSS que para la página de nueva película
+import '../../newmovie/nuevomovie.css'; // Usa el mismo CSS que para la página de nueva película
 
 const EditMoviePage: React.FC = () => {
     const router = useRouter();

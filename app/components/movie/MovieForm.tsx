@@ -2,23 +2,81 @@ import React, { useState, useEffect } from 'react';
 import { MovieAdd, Movie } from '../../types/movie';
 import Link from 'next/link';
 
+interface Director {
+    id: number;
+    name: string;
+}
+
+interface Actor {
+    id: number;
+    name: string;
+}
+
+interface Band {
+    id: number;
+    name: string;
+}
+
+interface Distributor {
+    id: number;
+    name: string;
+}
+
 interface MovieFormProps {
     movie?: Movie;
     onSave: (movie: MovieAdd) => void;
 }
 
 const MovieForm: React.FC<MovieFormProps> = ({ movie, onSave }) => {
+    // Estados originales
     const [title, setTitle] = useState(movie ? movie.title : '');
     const [gender, setGender] = useState(movie ? movie.gender : '');
     const [duration, setDuration] = useState(movie ? movie.duration.toString() : '');
     const [synopsis, setSynopsis] = useState(movie ? movie.synopsis : '');
     const [rating, setRating] = useState(movie ? movie.rating : '');
     const [poster, setPoster] = useState(movie ? movie.poster : '');
+    
+    // Estados para los IDs seleccionados
     const [directorId, setDirectorId] = useState(movie ? movie.director_id.toString() : '');
     const [actorId, setActorId] = useState(movie ? movie.actor_id.toString() : '');
     const [bandsId, setBandsId] = useState(movie ? movie.bands_id.toString() : '');
     const [distributorId, setDistributorId] = useState(movie ? movie.distributor_id.toString() : '');
 
+    // Estados para las listas de opciones
+    const [directors, setDirectors] = useState<Director[]>([]);
+    const [actors, setActors] = useState<Actor[]>([]);
+    const [bands, setBands] = useState<Band[]>([]);
+    const [distributors, setDistributors] = useState<Distributor[]>([]);
+
+    // Cargar las listas al montar el componente
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [directorsRes, actorsRes, bandsRes, distributorsRes] = await Promise.all([
+                    fetch('https://back-k1a3.onrender.com/director/?state=true'),
+                    fetch('https://back-k1a3.onrender.com/actor/?state=true'),
+                    fetch('https://back-k1a3.onrender.com/bands/?state=true'),
+                    fetch('https://back-k1a3.onrender.com/distributor/?state=true')
+                ]);
+
+                const directorsData = await directorsRes.json();
+                const actorsData = await actorsRes.json();
+                const bandsData = await bandsRes.json();
+                const distributorsData = await distributorsRes.json();
+
+                setDirectors(directorsData.results || []);
+                setActors(actorsData.results || []);
+                setBands(bandsData.results || []);
+                setDistributors(distributorsData.results || []);
+            } catch (error) {
+                console.error('Error fetching options:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    // Efecto para actualizar campos cuando se proporciona una película
     useEffect(() => {
         if (movie) {
             setTitle(movie.title);
@@ -99,38 +157,63 @@ const MovieForm: React.FC<MovieFormProps> = ({ movie, onSave }) => {
                 required
                 className="input-field"
             />
-            <input
-                type="number"
+
+            {/* Selects para los IDs */}
+            <select
                 value={directorId}
                 onChange={(e) => setDirectorId(e.target.value)}
-                placeholder="ID del Director"
                 required
                 className="input-field"
-            />
-            <input
-                type="number"
+            >
+                <option value="">Seleccionar Director</option>
+                {directors.map((director) => (
+                    <option key={director.id} value={director.id}>
+                        {director.name}
+                    </option>
+                ))}
+            </select>
+
+            <select
                 value={actorId}
                 onChange={(e) => setActorId(e.target.value)}
-                placeholder="ID del Actor"
                 required
                 className="input-field"
-            />
-            <input
-                type="number"
+            >
+                <option value="">Seleccionar Actor</option>
+                {actors.map((actor) => (
+                    <option key={actor.id} value={actor.id}>
+                        {actor.name}
+                    </option>
+                ))}
+            </select>
+
+            <select
                 value={bandsId}
                 onChange={(e) => setBandsId(e.target.value)}
-                placeholder="ID de las Bandas"
                 required
                 className="input-field"
-            />
-            <input
-                type="number"
+            >
+                <option value="">Seleccionar Banda</option>
+                {bands.map((band) => (
+                    <option key={band.id} value={band.id}>
+                        {band.name}
+                    </option>
+                ))}
+            </select>
+
+            <select
                 value={distributorId}
                 onChange={(e) => setDistributorId(e.target.value)}
-                placeholder="ID del Distribuidor"
                 required
                 className="input-field"
-            />
+            >
+                <option value="">Seleccionar Distribuidor</option>
+                {distributors.map((distributor) => (
+                    <option key={distributor.id} value={distributor.id}>
+                        {distributor.name}
+                    </option>
+                ))}
+            </select>
 
             <div className="button-container1">
                 <Link href="/admin/movie">

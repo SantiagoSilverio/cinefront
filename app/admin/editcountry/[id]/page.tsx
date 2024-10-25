@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import CountryForm from '../../../components/country/CountryForm';
 import Link from 'next/link';
 import { Country } from '../../../types/country';
-import '../../nuevocountry/nuevocountry.css'; // Usa el mismo CSS que para la otra página
+import '../../newcountry/nuevocountry.css'; // Usa el mismo CSS que para la otra página
 
 const EditCountryPage: React.FC = () => {
     const router = useRouter();

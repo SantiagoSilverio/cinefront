@@ -45,7 +45,7 @@ const ActorList: React.FC<ActorListProps> = ({ actors, onDelete, onSort, sortCol
                         <td id="name-actor-row">{actor.name}</td>
                         <td id="state-actor-row">{actor.state ? 'Activo' : 'Inactivo'}</td>
                         <td id="action-actor-row">
-                            <Link href={`/admin/editaractor/${actor.id}`}>
+                            <Link href={`/admin/editactor/${actor.id}`}>
                                 <button id="edit-button" className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
                                     Editar
                                 </button>
