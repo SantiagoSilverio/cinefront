@@ -82,7 +82,7 @@ const EditActorPage: React.FC = () => {
         <div id="edit-actor" className="flex flex-col min-h-screen">
             <main id="main-content" className="flex-grow container mx-auto p-4">
                 <h1 id="title" className="title">Editar actor</h1>
-                <div id="edit-form" c className="form-container">
+                <div id="edit-form"  className="form-container">
                     {actor ? (
                         <ActorForm id="actor-form" actor={actor} onSave={updateActor} />
                     ) : (
