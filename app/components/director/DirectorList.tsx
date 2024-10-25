@@ -5,6 +5,7 @@ import '../../admin/directors/director.css';
 
 interface DirectorListProps {
     directors: Director[];
+    onEdit: (director: Director) => void;  // Agrega esta línea
     onDelete: (id: number) => void;
     onSort: (column: string) => void;
     sortColumn: string | null;
@@ -45,9 +46,10 @@ const DirectorList: React.FC<DirectorListProps> = ({ directors, onDelete, onSort
                         <td>{director.state ? 'Activo' : 'Inactivo'}</td>
                         <td>
                             <Link href={`/admin/editdirector/${director.id}`}>
-                                <button className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
+                                <button onClick={() => onEdit(director)} className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
                                     Editar
                                 </button>
+
                             </Link>
                             <button onClick={() => onDelete(director.id)} className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 focus:outline-none focus:ring-1 focus:ring-red-500">
                                 Eliminar

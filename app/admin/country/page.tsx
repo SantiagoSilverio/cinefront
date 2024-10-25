@@ -130,15 +130,15 @@ const CountryPage: React.FC = () => {
                             />
                         </div>
                     </div>
-
                     <CountryList
                         countries={filteredCountries}
-                        onEdit={handleEdit}
+                        onEdit={handleEdit} // Asegúrate de pasar esta propiedad
                         onDelete={handleDelete}
                         onSort={handleSort}
                         sortColumn={sortColumn}
                         sortOrder={sortOrder}
                     />
+
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}
