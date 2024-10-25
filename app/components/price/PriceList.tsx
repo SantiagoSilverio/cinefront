@@ -3,15 +3,17 @@ import Link from 'next/link';
 import { Price } from '../../types/price';
 import '../../admin/price/price.css';
 
-interface PriceListProps {
+type PriceListProps = {
     prices: Price[];
+    onEdit: (price: Price) => JSX.Element;
     onDelete: (id: number) => void;
     onSort: (column: string) => void;
     sortColumn: string | null;
     sortOrder: 'asc' | 'desc';
-}
+};
 
-const PriceList: React.FC<PriceListProps> = ({ prices, onDelete, onSort, sortColumn, sortOrder }) => {
+
+const PriceList: React.FC<PriceListProps> = ({ prices, onEdit, onDelete, onSort, sortColumn, sortOrder }) => {
     return (
         <table className="table-margin table-striped table-centered">
             <thead>
