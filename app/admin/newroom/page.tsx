@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import '../newactor/nuevoactor.css';  // Reutilizamos el CSS de nuevo actor
+
 
 interface RoomAdd {
   number_rooms: number;
