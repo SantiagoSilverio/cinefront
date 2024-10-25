@@ -1,4 +1,5 @@
-// EditReservation.tsx
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import ReservationForm from '../../../components/reservations/ReservationForm';
 import { Reservation, ReservationAdd } from '../../../types/reservations';
