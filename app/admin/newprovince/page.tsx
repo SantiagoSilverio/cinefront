@@ -5,7 +5,7 @@ import ProvinceForm from '../../components/province/ProvinceForm';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
 import { ProvinceAdd, Country } from '../../types/country';
-import '../nuevoprovince/nuevoprovince.css';
+
 
 const NewProvincePage: React.FC = () => {
     const [provinces, setProvinces] = useState<ProvinceAdd[]>([]);

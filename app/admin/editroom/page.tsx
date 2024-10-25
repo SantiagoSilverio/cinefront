@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import RoomForm from '../../components/room/RoomForm'; // Asegúrate de tener el formulario de Room
 import { Room } from '../../types/room';  // Asegúrate de tener el tipo Room definido
-import '../nuevoroom/nuevoroom.css';  // Usa el mismo CSS o crea uno nuevo si es necesario
+
 
 const EditRoomPage: React.FC = () => {
     const router = useRouter();
