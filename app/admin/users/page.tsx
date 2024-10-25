@@ -126,7 +126,6 @@ const UsersPage: React.FC = () => {
                               </div>
 
                               <UserList
-                                    id="lista-users"
                                     users={filteredUsers}
                                     onEdit={handleEdit}
                                     onDelete={handleDelete}
@@ -134,6 +133,7 @@ const UsersPage: React.FC = () => {
                                     sortColumn={sortColumn}
                                     sortOrder={sortOrder}
                               />
+
 
                               <Pagination
                                     id="pagination-nav"

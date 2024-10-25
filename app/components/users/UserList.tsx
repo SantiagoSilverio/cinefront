@@ -1,14 +1,16 @@
 import { User } from '../../types/users';
 import '../../admin/users/users.css';
 
-type UserListProps = {
+interface UserListProps {
+      id?: string;
       users: User[];
       onEdit: (user: User) => void;
       onDelete: (id: number) => void;
       onSort: (column: string) => void;
       sortColumn: string | null;
       sortOrder: 'asc' | 'desc';
-};
+  }
+  
 
 const UserList: React.FC<UserListProps> = ({ users, onDelete, onEdit, sortColumn, sortOrder }) => {
       console.log(users);
