@@ -123,12 +123,13 @@ const DirectorPage: React.FC = () => {
                     </div>
                     <DirectorList
                         directors={filteredDirectors}
-                        onEdit={handleEdit}
+                        onEdit={handleEdit} // Asegúrate de pasar esta propiedad
                         onDelete={handleDelete}
                         onSort={handleSort}
                         sortColumn={sortColumn}
                         sortOrder={sortOrder}
                     />
+
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}
