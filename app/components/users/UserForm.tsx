@@ -17,7 +17,8 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
       const [email, setEmail] = useState(user ? user.email : '');
       const [password, setPassword] = useState(user ? user.password : '');
       const [address, setAddress] = useState(user ? user.address : '');
-      const [cityId, setCityId] = useState(user ? user.city_id : '');
+      const [cityId, setCityId] = useState<string>(user?.city_id ?? ''); // Initializes to an empty string if user is undefined
+
 
       const [cities, setCities] = useState<City[]>([]);
 
@@ -52,22 +53,23 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
       const handleSubmit = async (e: React.FormEvent) => {
             e.preventDefault();
             try {
-                  await onSave({
-                        username,
-                        first_name: firstName,
-                        last_name: lastName,
-                        phone,
-                        email,
-                        password,
-                        address,
-                        city_id: cityId
-                  });
-                  alert('Usuario creado exitosamente');
-                  window.location.href = '/admin/users';
+                await onSave({
+                    username,
+                    first_name: firstName,
+                    last_name: lastName,
+                    phone,
+                    email,
+                    password,
+                    address,
+                    city_id: cityId // This should be fine now after the type update
+                });
+                alert('Usuario creado exitosamente');
+                window.location.href = '/admin/users';
             } catch (error) {
-                  console.error('Error al guardar el usuario:', error);
+                console.error('Error al guardar el usuario:', error);
             }
-      };
+        };
+        
 
       return (
             <form id="user-form" onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 w-full">

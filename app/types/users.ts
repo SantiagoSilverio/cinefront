@@ -6,8 +6,8 @@ export interface UserAdd {
       email: string;
       password: string;
       address: string;
-      city: string;
-}
+      city_id: string; // Add this line
+  }
 
 export interface User {
       id: number;
