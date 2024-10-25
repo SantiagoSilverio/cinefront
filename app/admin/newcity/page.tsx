@@ -22,8 +22,8 @@ const NewCityPage: React.FC = () => {
                         name: city.name,
                         prefix: city.prefix,
                         postal_code: city.postal_code,
-                        province: city.province_id,
-                  };
+                        province: city.province, // Cambiado a `province`
+                    };
 
                   const response = await fetch('https://back-k1a3.onrender.com/city/', {
                         method: 'POST',
