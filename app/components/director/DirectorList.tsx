@@ -12,7 +12,7 @@ interface DirectorListProps {
     sortOrder: 'asc' | 'desc';
 }
 
-const DirectorList: React.FC<DirectorListProps> = ({ directors, onDelete, onSort, sortColumn, sortOrder }) => {
+const DirectorList: React.FC<DirectorListProps> = ({ directors, onEdit, onDelete, onSort, sortColumn, sortOrder }) => {
     return (
         <table className="table-margin table-striped table-centered">
             <thead>
@@ -49,7 +49,6 @@ const DirectorList: React.FC<DirectorListProps> = ({ directors, onDelete, onSort
                                 <button onClick={() => onEdit(director)} className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500">
                                     Editar
                                 </button>
-
                             </Link>
                             <button onClick={() => onDelete(director.id)} className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 focus:outline-none focus:ring-1 focus:ring-red-500">
                                 Eliminar
@@ -61,5 +60,6 @@ const DirectorList: React.FC<DirectorListProps> = ({ directors, onDelete, onSort
         </table>
     );
 };
+
 
 export default DirectorList;
