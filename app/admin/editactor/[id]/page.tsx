@@ -84,7 +84,7 @@ const EditActorPage: React.FC = () => {
                 <h1 id="title" className="title">Editar actor</h1>
                 <div id="edit-form"  className="form-container">
                     {actor ? (
-                        <ActorForm actor={actor} onSave={updateActor} />
+                        <ActorForm key="actor-form" actor={actor} onSave={updateActor} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos del actor.</p>
                     )}
