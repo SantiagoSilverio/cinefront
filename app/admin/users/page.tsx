@@ -81,13 +81,24 @@ const UsersPage: React.FC = () => {
             const order = sortColumn === column && sortOrder === 'asc' ? 'desc' : 'asc';
             setSortOrder(order);
             setSortColumn(column);
-            const sortedUsers = [...users].sort((a, b) => {
-                  if (a[column as keyof User] < b[column as keyof User]) return order === 'asc' ? -1 : 1;
-                  if (a[column as keyof User] > b[column as keyof User]) return order === 'asc' ? 1 : -1;
-                  return 0;
-            });
-            setUsers(sortedUsers);
-      };
+        
+            if (users.length > 0 && column in users[0]) {
+                const sortedUsers = [...users].sort((a, b) => {
+                    const aValue = a[column as keyof User] ?? ''; // Fallback to '' if undefined
+                    const bValue = b[column as keyof User] ?? ''; // Fallback to '' if undefined
+        
+                    if (aValue < bValue) return order === 'asc' ? -1 : 1;
+                    if (aValue > bValue) return order === 'asc' ? 1 : -1;
+                    return 0;
+                });
+        
+                setUsers(sortedUsers);
+            } else {
+                console.warn(`Invalid column: ${column}`);
+            }
+        };
+        
+        
       const handlePageChange = (page: number) => {
             setCurrentPage(page);
       };
