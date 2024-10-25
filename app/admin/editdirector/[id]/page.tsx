@@ -84,7 +84,7 @@ const EditDirectorPage: React.FC = () => {
                 <h1 id="title" className="title">Editar director</h1>
                 <div id="edit-form" className="form-container">
                     {director ? (
-                        <DirectorForm id="director-form" director={director} onSave={updateDirector} />
+                        <DirectorForm key="director-form" director={director} onSave={updateDirector} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos del director.</p>
                     )}

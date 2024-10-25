@@ -84,7 +84,7 @@ const EditBandPage: React.FC = () => {
                 <h1 id="title" className="title">Editar banda</h1>
                 <div id="edit-form" className="form-container">
                     {band ? (
-                        <BandForm id="band-form" band={band} onSave={updateBand} />
+                        <BandForm key="band-form" band={band} onSave={updateBand} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos de la banda.</p>
                     )}

@@ -105,7 +105,7 @@ const EditProvincePage: React.FC = () => {
                 <h1 id="title" className="title">Editar provincia</h1>
                 <div id="edit-form" className="form-container">
                     {province ? (
-                        <ProvinceForm id="province-form" province={province} onSave={updateProvince} countries={countries} />
+                        <ProvinceForm key="province-form" province={province} onSave={updateProvince} countries={countries} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos de la provincia.</p>
                     )}

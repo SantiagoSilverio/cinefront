@@ -84,7 +84,7 @@ const EditCountryPage: React.FC = () => {
                 <h1 id="title" className="title">Editar país</h1>
                 <div id="edit-form" className="form-container">
                     {country ? (
-                        <CountryForm id="country-form" country={country} onSave={updateCountry} />
+                        <CountryForm key="country-form" country={country} onSave={updateCountry} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos del país.</p>
                     )}

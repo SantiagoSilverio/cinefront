@@ -84,7 +84,7 @@ const EditTillPage: React.FC = () => {
                 <h1 id="title" className="title">Editar Caja Registradora</h1>
                 <div id="edit-form" className="form-container">
                     {till ? (
-                        <TillForm id="till-form" till={till} onSave={updateTill} />
+                        <TillForm key="till-form" till={till} onSave={updateTill} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos de la Caja Registradora.</p>
                     )}

@@ -84,7 +84,7 @@ const EditUserPage: React.FC = () => {
                         <h1 id="title" className="title">Editar usuario</h1>
                         <div id="edit-form"  className="form-container">
                               {user ? (
-                                    <UserForm id="user-form" user={user} onSave={updateUser} />
+                                    <UserForm key="user-form" user={user} onSave={updateUser} />
                               ) : (
                                     <p id="no-data-message">No se encontraron datos del usuario.</p>
                               )}

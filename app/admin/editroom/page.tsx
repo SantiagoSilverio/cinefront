@@ -84,7 +84,7 @@ const EditRoomPage: React.FC = () => {
                 <h1 id="title" className="title">Editar sala</h1>
                 <div id="edit-form" className="form-container">
                     {room ? (
-                        <RoomForm id="room-form" room={room} onSave={updateRoom} />
+                        <RoomForm key="room-form" room={room} onSave={updateRoom} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos de la sala.</p>
                     )}
