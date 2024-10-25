@@ -70,7 +70,7 @@ const EditProvincePage: React.FC = () => {
         }
     };
 
-    const updateProvince = async (updatedProvince: Partial<Province>) => {
+    const updateProvince = async (updatedProvince: ProvinceAdd) => {
         try {
             if (!province) {
                 throw new Error('Province data is not available');
@@ -79,7 +79,7 @@ const EditProvincePage: React.FC = () => {
             const myHeaders = new Headers();
             myHeaders.append("Authorization", `Bearer ${token}`);
             myHeaders.append("Content-Type", "application/json");
-
+    
             const response = await fetch(`https://back-k1a3.onrender.com/province/${province.id}/`, {
                 method: 'PUT',
                 headers: myHeaders,
@@ -94,6 +94,8 @@ const EditProvincePage: React.FC = () => {
             console.error('Failed to update province:', error);
         }
     };
+    
+
 
     if (loading) {
         return <p>Cargando datos de la provincia...</p>;

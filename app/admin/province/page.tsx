@@ -5,7 +5,7 @@ import ProvinceList from '../../components/province/ProvinceList';
 import Pagination from '../../components/pagination/pagination';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { Province, Country } from '../../types/country';
+import { Province, Country, ProvinceAdd } from '../../types/country';
 import '../general.css';
 
 const ProvincePage: React.FC = () => {
@@ -118,6 +118,31 @@ const ProvincePage: React.FC = () => {
     const filteredProvinces = provinces.filter(province =>
         province.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    const handleSave = async (province: ProvinceAdd) => {
+        try {
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const response = await fetch(`https://back-k1a3.onrender.com/province/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...myHeaders,
+                },
+                body: JSON.stringify(province)
+            });
+
+            if (!response.ok) {
+                throw new Error('Error saving province');
+            }
+
+            const newProvince = await response.json();
+            setProvinces([...provinces, newProvince]);
+        } catch (error) {
+            console.error('Failed to save province:', error);
+        }
+    };
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -155,7 +180,9 @@ const ProvincePage: React.FC = () => {
                         onSort={handleSort}
                         sortColumn={sortColumn}
                         sortOrder={sortOrder}
+                        onSave={handleSave} // Añadido onSave
                     />
+
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}

@@ -1,16 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
-import { Province } from '../../types/country';
+import { Province, ProvinceAdd } from '../../types/country';
 
 
 interface ProvinceListProps {
     provinces: Province[];
-    onEdit: (province: Province) => React.ReactElement;
+    onEdit: (province: Province) => JSX.Element;
     onDelete: (id: number) => void;
     onSort: (column: string) => void;
     sortColumn: string | null;
-    sortOrder: 'asc' | 'desc';
-  }
+    sortOrder: "asc" | "desc";
+    onSave: (province: ProvinceAdd) => void; // Asegúrate de que esto esté aquí
+}
+
 
 const ProvinceList: React.FC<ProvinceListProps> = ({ provinces, onDelete, onSort, sortColumn, sortOrder }) => {
     return (

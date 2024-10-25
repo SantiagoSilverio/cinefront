@@ -25,7 +25,8 @@ const ProvinceForm: React.FC<ProvinceFormProps> = ({ province, countries, onSave
             alert('Seleccione un país');
             return;
         }
-        onSave({ name, country: Number(countryId) });
+        // Al pasar el ID del país en `onSave`, que es lo esperado en `ProvinceAdd`
+        onSave({ name, country: Number(countryId) }); // Asegúrate de convertir a número
         if (!province) {
             setName('');
             setCountryId('');
@@ -58,7 +59,7 @@ const ProvinceForm: React.FC<ProvinceFormProps> = ({ province, countries, onSave
 
             <div className="button-container1">
                 <Link href="/admin/province">
-                    <button className="btn">Ir a la lista</button>
+                    <button type="button" className="btn">Ir a la lista</button>
                 </Link>
                 <button type="submit" className="submit-button">Guardar</button>
             </div>
