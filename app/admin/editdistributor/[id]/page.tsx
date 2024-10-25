@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
+import Cookies from 'js-cookie';
 import DistributorForm from '../../../components/distributors/DistributorForm'; // Ajusta la ruta para distribuidores
 import { Distributor } from '../../../types/distributors';
 import '../../newcountry/nuevocountry.css';
@@ -30,7 +30,13 @@ const EditDistributorPage: React.FC = () => {
 
     const fetchDistributor = async (distributorId: number) => {
         try {
-            const response = await fetch(`https://back-k1a3.onrender.com/distributor/${distributorId}/`);
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const response = await fetch(`https://back-k1a3.onrender.com/distributor/${distributorId}/`, {
+                headers: myHeaders,
+            });
             if (!response.ok) {
                 throw new Error('Error fetching distributor');
             }
@@ -48,16 +54,20 @@ const EditDistributorPage: React.FC = () => {
             if (!distributor) {
                 throw new Error('Distributor data is not available');
             }
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+            myHeaders.append("Content-Type", "application/json");
+
             const response = await fetch(`https://back-k1a3.onrender.com/distributor/${distributor.id}/`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: myHeaders,
                 body: JSON.stringify(updatedDistributor),
             });
             if (!response.ok) {
-                throw new Error('Error updating distributor');
+                throw new Error('Error updating Distributor');
             }
+            alert('Distribuior editado con éxito');
             router.push('/admin/distributors');
         } catch (error) {
             console.error('Failed to update distributor:', error);

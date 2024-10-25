@@ -21,9 +21,15 @@ const ProvinceForm: React.FC<ProvinceFormProps> = ({ province, countries, onSave
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if (countryId === '') {
+            alert('Seleccione un país');
+            return;
+        }
         onSave({ name, country: Number(countryId) });
-        setName('');
-        setCountryId('');
+        if (!province) {
+            setName('');
+            setCountryId('');
+        }
     };
 
     return (

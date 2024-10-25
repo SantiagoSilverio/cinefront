@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CinemaForm from '../../../components/cinemas/CinemaForm';
-import Link from 'next/link';
+import Cookies from 'js-cookie';
 import { Cinema } from '../../../types/cinemas';
 import '../../newcinema/nuevocinema.css'; 
 
@@ -30,7 +30,13 @@ const EditCineamaPage: React.FC = () => {
 
     const fetchCinema = async (cinemaId: number) => {
         try {
-            const response = await fetch(`https://back-k1a3.onrender.com/cinema/${cinemaId}/`);
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const response = await fetch(`https://back-k1a3.onrender.com/cinema/${cinemaId}/`, {
+                headers: myHeaders,
+            });
             if (!response.ok) {
                 throw new Error('Error fetching cinema');
             }
@@ -48,43 +54,42 @@ const EditCineamaPage: React.FC = () => {
             if (!cinema) {
                 throw new Error('cinema data is not available');
             }
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+            myHeaders.append("Content-Type", "application/json");
+
             const response = await fetch(`https://back-k1a3.onrender.com/cinema/${cinema.id}/`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: myHeaders,
                 body: JSON.stringify(updatedCinema),
             });
             if (!response.ok) {
                 throw new Error('Error updating cinema');
             }
-            router.push('/cinemas');
+            router.push('/admin/cinemas');
         } catch (error) {
             console.error('Failed to update cinema:', error);
         }
     };
 
     if (loading) {
-        return <p>Cargando datos del Cine...</p>;
+        return <p id="loading-message">Cargando datos del Cine...</p>;
     }
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div id="edit-cinema" className="flex flex-col min-h-screen">
 
-            <main className="flex-grow container mx-auto p-4">
-                <h1 className="title">Editar cine</h1>
-                <div className="form-container">
+            <main id="main-content" className="flex-grow container mx-auto p-4">
+                <h1 id="title" className="title">Editar cine</h1>
+                <div id="edit-form"  className="form-container">
                     {cinema ? (
-                        <CinemaForm cinema={cinema} onSave={updateCinema} />
+                        <CinemaForm id="cinema-form" cinema={cinema} onSave={updateCinema} />
                     ) : (
-                        <p>No se encontraron datos del cine.</p>
+                        <p id="no-data-message">No se encontraron datos del cine.</p>
                     )}
                 </div>
-                <div className="button-container">
-
-                </div>
             </main>
-
         </div>
     );
 };

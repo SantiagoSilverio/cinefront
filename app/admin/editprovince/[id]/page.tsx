@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ProvinceForm from '../../../components/province/ProvinceForm';
-import Link from 'next/link';
+import Cookies from 'js-cookie';
 import { Province, Country } from '../../../types/country';
-import '../../newactor/nuevoactor.css'; 
+import '../../nuevoprovince/nuevoprovince.css';
 
 const EditProvincePage: React.FC = () => {
     const router = useRouter();
@@ -32,7 +32,13 @@ const EditProvincePage: React.FC = () => {
 
     const fetchCountries = async () => {
         try {
-            const response = await fetch('https://back-k1a3.onrender.com/country/?state=true');
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const response = await fetch('https://back-k1a3.onrender.com/country/?state=true', {
+                headers: myHeaders,
+            });
             if (!response.ok) {
                 throw new Error('Error fetching countries');
             }
@@ -45,7 +51,13 @@ const EditProvincePage: React.FC = () => {
 
     const fetchProvince = async (provinceId: number) => {
         try {
-            const response = await fetch(`https://back-k1a3.onrender.com/province/${provinceId}/`);
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const response = await fetch(`https://back-k1a3.onrender.com/province/${provinceId}/`, {
+                headers: myHeaders,
+            });
             if (!response.ok) {
                 throw new Error('Error fetching province');
             }
@@ -63,16 +75,20 @@ const EditProvincePage: React.FC = () => {
             if (!province) {
                 throw new Error('Province data is not available');
             }
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+            myHeaders.append("Content-Type", "application/json");
+
             const response = await fetch(`https://back-k1a3.onrender.com/province/${province.id}/`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: myHeaders,
                 body: JSON.stringify(updatedProvince),
             });
             if (!response.ok) {
                 throw new Error('Error updating province');
             }
+            alert('Provincia editada con éxito');
             router.push('/admin/province');
         } catch (error) {
             console.error('Failed to update province:', error);
@@ -84,14 +100,14 @@ const EditProvincePage: React.FC = () => {
     }
 
     return (
-        <div className="flex flex-col min-h-screen">
-            <main className="flex-grow container mx-auto p-4">
-                <h1 className="title">Editar provincia</h1>
-                <div className="form-container">
+        <div id="edit-province" className="flex flex-col min-h-screen">
+            <main id="main-content" className="flex-grow container mx-auto p-4">
+                <h1 id="title" className="title">Editar provincia</h1>
+                <div id="edit-form" className="form-container">
                     {province ? (
-                        <ProvinceForm province={province} onSave={updateProvince} countries={countries} />
+                        <ProvinceForm id="province-form" province={province} onSave={updateProvince} countries={countries} />
                     ) : (
-                        <p>No se encontraron datos de la provincia.</p>
+                        <p id="no-data-message">No se encontraron datos de la provincia.</p>
                     )}
                 </div>
             </main>

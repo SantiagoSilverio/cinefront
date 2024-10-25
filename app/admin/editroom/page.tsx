@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import RoomForm from '../../components/room/RoomForm'; // Asegúrate de tener el formulario de Room
-import { Room } from '../../types/room';  // Asegúrate de tener el tipo Room definido
-
+import RoomForm from '../../components/room/RoomForm';
+import Cookies from 'js-cookie';
+import { Room } from '../../types/room';
+import '../nuevoroom/nuevoroom.css';
 
 const EditRoomPage: React.FC = () => {
     const router = useRouter();
@@ -29,7 +30,13 @@ const EditRoomPage: React.FC = () => {
 
     const fetchRoom = async (roomId: number) => {
         try {
-            const response = await fetch(`https://back-k1a3.onrender.com/room/${roomId}/`);
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const response = await fetch(`https://back-k1a3.onrender.com/room/${roomId}/`, {
+                headers: myHeaders,
+            });
             if (!response.ok) {
                 throw new Error('Error fetching room');
             }
@@ -47,16 +54,20 @@ const EditRoomPage: React.FC = () => {
             if (!room) {
                 throw new Error('Room data is not available');
             }
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+            myHeaders.append("Content-Type", "application/json");
+
             const response = await fetch(`https://back-k1a3.onrender.com/room/${room.id}/`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: myHeaders,
                 body: JSON.stringify(updatedRoom),
             });
             if (!response.ok) {
                 throw new Error('Error updating room');
             }
+            alert('Sala editada con éxito');
             router.push('/room');
         } catch (error) {
             console.error('Failed to update room:', error);
@@ -64,18 +75,18 @@ const EditRoomPage: React.FC = () => {
     };
 
     if (loading) {
-        return <p>Cargando datos de la sala...</p>;
+        return <p id="loading-message">Cargando datos de la sala...</p>;
     }
 
     return (
-        <div className="flex flex-col min-h-screen">
-            <main className="flex-grow container mx-auto p-4">
-                <h1 className="title">Editar sala</h1>
-                <div className="form-container">
+        <div id="edit-room" className="flex flex-col min-h-screen">
+            <main id="main-content" className="flex-grow container mx-auto p-4">
+                <h1 id="title" className="title">Editar sala</h1>
+                <div id="edit-form" className="form-container">
                     {room ? (
-                        <RoomForm room={room} onSave={updateRoom} />
+                        <RoomForm id="room-form" room={room} onSave={updateRoom} />
                     ) : (
-                        <p>No se encontraron datos de la sala.</p>
+                        <p id="no-data-message">No se encontraron datos de la sala.</p>
                     )}
                 </div>
             </main>

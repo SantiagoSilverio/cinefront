@@ -5,17 +5,11 @@ import '../../admin/country/country.css';
 
 interface CountryListProps {
     countries: Country[];
-    onEdit: (country: Country) => void;  // Agregar esta línea
     onDelete: (id: number) => void;
     onSort: (column: string) => void;
     sortColumn: string | null;
     sortOrder: 'asc' | 'desc';
 }
-
-
-
-
-
 
 const CountryList: React.FC<CountryListProps> = ({ countries, onDelete, onSort, sortColumn, sortOrder }) => {
     return (
@@ -55,8 +49,6 @@ const CountryList: React.FC<CountryListProps> = ({ countries, onDelete, onSort, 
                                     Editar
                                 </button>
                             </Link>
-
-
                             <button onClick={() => onDelete(country.id)} className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 focus:outline-none focus:ring-1 focus:ring-red-500">
                                 Eliminar
                             </button>

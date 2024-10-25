@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import TillForm from '../../../components/tills/TillForm';
-import Link from 'next/link';
+import Cookies from 'js-cookie';
 import { Till } from '../../../types/tills';
 import '../../newtill/nuevotills.css'; 
 
@@ -30,7 +30,13 @@ const EditTillPage: React.FC = () => {
 
     const fetchTill = async (tillId: number) => {
         try {
-            const response = await fetch(`https://back-k1a3.onrender.com/till/${tillId}/`);
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const response = await fetch(`https://back-k1a3.onrender.com/till/${tillId}/`, {
+                headers: myHeaders,
+            });
             if (!response.ok) {
                 throw new Error('Error fetching till');
             }
@@ -48,43 +54,42 @@ const EditTillPage: React.FC = () => {
             if (!till) {
                 throw new Error('till data is not available');
             }
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+            myHeaders.append("Content-Type", "application/json");
+
             const response = await fetch(`https://back-k1a3.onrender.com/till/${till.id}/`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: myHeaders,
                 body: JSON.stringify(updatedTill),
             });
             if (!response.ok) {
-                throw new Error('Error updating till');
+                throw new Error('Error updating Till');
             }
-            router.push('/admin/till');
+            router.push('/admin/tills');
         } catch (error) {
             console.error('Failed to update till:', error);
         }
     };
 
     if (loading) {
-        return <p>Cargando datos de la Caja Registradora...</p>;
+        return <p id="loading-message">Cargando datos de la Caja Registradora...</p>;
     }
 
     return (
         <div className="flex flex-col min-h-screen">
 
-            <main className="flex-grow container mx-auto p-4">
-                <h1 className="title">Editar Caja Registradora</h1>
-                <div className="form-container">
+            <main id="main-content" className="flex-grow container mx-auto p-4">
+                <h1 id="title" className="title">Editar Caja Registradora</h1>
+                <div id="edit-form" className="form-container">
                     {till ? (
-                        <TillForm till={till} onSave={updateTill} />
+                        <TillForm id="till-form" till={till} onSave={updateTill} />
                     ) : (
-                        <p>No se encontraron datos de la Caja Registradora.</p>
+                        <p id="no-data-message">No se encontraron datos de la Caja Registradora.</p>
                     )}
                 </div>
-                <div className="button-container">
-
-                </div>
             </main>
-
         </div>
     );
 };

@@ -10,8 +10,19 @@ type UserListProps = {
       sortOrder: 'asc' | 'desc';
 };
 
-const UserList: React.FC<UserListProps> = ({ users, onDelete, onSort, sortColumn, sortOrder }) => {
+const UserList: React.FC<UserListProps> = ({ users, onDelete, onEdit, sortColumn, sortOrder }) => {
       console.log(users);
+
+      const handleEdit = (user: User) => {
+            console.log('Editar usuario:', user);
+            onEdit(user);
+      };
+
+      const handleDelete = (id: number) => {
+            console.log('Eliminar usuario:', id);
+            onDelete(id);
+      };
+
       return (
             <table id="user-list-table" className="table-margin table-striped table-centered">
                   <thead>
@@ -27,7 +38,7 @@ const UserList: React.FC<UserListProps> = ({ users, onDelete, onSort, sortColumn
                                     <button onClick={() => onSort('username')}>
                                           {sortColumn === 'username' ? (sortOrder === 'asc' ? '↓' : '↑') : '↕'}
                                     </button>
-                              </th>                              
+                              </th>
                               <th id="th-phone">
                                     Teléfono
                                     <button onClick={() => onSort('phone')}>
@@ -69,17 +80,21 @@ const UserList: React.FC<UserListProps> = ({ users, onDelete, onSort, sortColumn
                                     <td id="td-phone">{user.phone}</td>
                                     <td id="td-email">{user.email}</td>
                                     <td id="td-address">{user.address}</td>
-                                    <td id="td-city">{user.city ? user.city.name : 'Sin ciudad'}</td>
+                                    <td id="td-city">{user.city?.name}</td>
                                     <td id="td-state">{user.state ? 'Inactivo' : 'Activo'}</td>
                                     <td>
                                           <button
                                                 id="edit-button"
-                                                onClick={() => onEdit(user)}
+                                                onClick={() => handleEdit(user)}
                                                 className="bg-yellow-500 text-white rounded-md px-3 py-2 hover:bg-yellow-700 focus:outline-none focus:ring-1 focus:ring-yellow-500"
                                           >
                                                 Editar
                                           </button>
-                                          <button id="delete-button" onClick={() => onDelete(user.id)} className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 focus:outline-none focus:ring-1 focus:ring-red-500">
+                                          <button
+                                                id="delete-button"
+                                                onClick={() => handleDelete(user.id)}
+                                                className="bg-red-500 text-white rounded-md px-3 py-2 hover:bg-red-700 focus:outline-none focus:ring-1 focus:ring-red-500"
+                                          >
                                                 Eliminar
                                           </button>
                                     </td>

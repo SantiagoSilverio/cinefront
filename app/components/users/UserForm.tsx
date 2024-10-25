@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { UserAdd, User } from '../../types/users';  // Importa los tipos
+import { UserAdd, User } from '../../types/users';
+import Cookies from 'js-cookie';
 import Link from 'next/link';
-
-interface Option {
-      id: number;
-      name: string;
-}
+import { City } from '../../types/cities';
 
 interface UserFormProps {
       user?: User;
@@ -20,19 +17,30 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
       const [email, setEmail] = useState(user ? user.email : '');
       const [password, setPassword] = useState(user ? user.password : '');
       const [address, setAddress] = useState(user ? user.address : '');
-      const [cityName, setCityName] = useState(user ? user.city : '');
+      const [cityId, setCityId] = useState(user ? user.city_id : '');
 
-      const [cities, setCities] = useState<Option[]>([]);
+      const [cities, setCities] = useState<City[]>([]);
 
       useEffect(() => {
             const fetchOptions = async () => {
                   try {
-                        const [citiesResponse] = await Promise.all([
-                              fetch('https://back-k1a3.onrender.com/city/')
-                        ]);
+                        const token = Cookies.get('access_token');
+                        const myHeaders = new Headers();
+                        myHeaders.append("Authorization", `Bearer ${token}`);
+                        myHeaders.append("Content-Type", "application/json");
 
-                        const citiesData = await citiesResponse.json();
+                        const response = await fetch('https://back-k1a3.onrender.com/city/', {
+                              method: 'GET',
+                              headers: myHeaders,
+                        });
+
+                        if (!response.ok) {
+                              throw new Error(`Error fetching cities: ${response.status}`);
+                        }
+
+                        const citiesData = await response.json();
                         setCities(citiesData.results);
+                        console.log(citiesData.results); // Verifica que los datos se estén almacenando correctamente
                   } catch (error) {
                         console.error('Error fetching cities:', error);
                   }
@@ -52,7 +60,7 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
                         email,
                         password,
                         address,
-                        city: cityName
+                        city_id: cityId
                   });
                   alert('Usuario creado exitosamente');
                   window.location.href = '/admin/users';
@@ -143,14 +151,14 @@ const UserForm: React.FC<UserFormProps> = ({ user, onSave }) => {
                   <div id="city-field" className="input-field">
                         <select
                               id="city-input"
-                              value={cityName}
-                              onChange={(e) => setCityName(e.target.value)}
+                              value={cityId}
+                              onChange={(e) => setCityId(e.target.value)}
                               required
                               className="w-full p-2 border border-gray-300 rounded-md"
                         >
                               <option value="">Selecciona una ciudad</option>
-                              {cities.map((city) => (
-                                    <option key={city.id} value={city.name}>{city.name}</option>
+                              {cities?.map((city) => (
+                                    <option key={city.id} value={city.id}>{city.name}</option>
                               ))}
                         </select>
                   </div>

@@ -2,9 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
+import Cookies from 'js-cookie';
 import CountryForm from '../../../components/country/CountryForm';
-import Link from 'next/link';
 import { Country } from '../../../types/country';
 import '../../newcountry/nuevocountry.css'; // Usa el mismo CSS que para la otra página
 
@@ -31,7 +30,13 @@ const EditCountryPage: React.FC = () => {
 
     const fetchCountry = async (countryId: number) => {
         try {
-            const response = await fetch(`https://back-k1a3.onrender.com/country/${countryId}/`);
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const response = await fetch(`https://back-k1a3.onrender.com/country/${countryId}/`, {
+                headers: myHeaders,
+            });
             if (!response.ok) {
                 throw new Error('Error fetching country');
             }
@@ -49,40 +54,42 @@ const EditCountryPage: React.FC = () => {
             if (!country) {
                 throw new Error('Country data is not available');
             }
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+            myHeaders.append("Content-Type", "application/json");
+
             const response = await fetch(`https://back-k1a3.onrender.com/country/${country.id}/`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: myHeaders,
                 body: JSON.stringify(updatedCountry),
             });
             if (!response.ok) {
-                throw new Error('Error updating country');
+                throw new Error('Error updating Country');
             }
-            router.push('/admin/countries');
+            alert('País editado con éxito');
+            router.push('/admin/country');
         } catch (error) {
             console.error('Failed to update country:', error);
         }
     };
 
     if (loading) {
-        return <p>Cargando datos del país...</p>;
+        return <p id="loading-message">Cargando datos del país...</p>;
     }
 
     return (
-        <div className="flex flex-col min-h-screen">
-
-            <main className="flex-grow container mx-auto p-4">
-                <h1 className="title">Editar país</h1>
-                <div className="form-container">
+        <div id="edit-country" className="flex flex-col min-h-screen">
+            <main id="main-content" className="flex-grow container mx-auto p-4">
+                <h1 id="title" className="title">Editar país</h1>
+                <div id="edit-form" className="form-container">
                     {country ? (
-                        <CountryForm country={country} onSave={updateCountry} />
+                        <CountryForm id="country-form" country={country} onSave={updateCountry} />
                     ) : (
-                        <p>No se encontraron datos del país.</p>
+                        <p id="no-data-message">No se encontraron datos del país.</p>
                     )}
                 </div>
             </main>
-
         </div>
     );
 };

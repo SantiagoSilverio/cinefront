@@ -50,7 +50,7 @@ const CityForm: React.FC<CityFormProps> = ({ city, onSave }) => {
             setName(city.name);
             setPostalCode(city.postal_code);
             setProvinceId(city.province_id);
-            setPrefix(city.prefijo);
+            setPrefix(city.prefix);
         }
     }, [city]);
 
@@ -60,7 +60,7 @@ const CityForm: React.FC<CityFormProps> = ({ city, onSave }) => {
             alert('ID de la provincia es requerido.');
             return;
         }
-        onSave({ name, postal_code: postalCode, province_id: Number(provinceId), prefix });
+        onSave({ name, postal_code: postalCode, province: Number(provinceId), prefix });
         resetForm();
     };
 

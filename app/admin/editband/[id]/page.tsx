@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import BandForm from '../../../components/bands/BandForm';
+import Cookies from 'js-cookie';
 import { Band } from '../../../types/bands';
 import '../../newband/nuevabanda.css'; // Reutiliza el mismo CSS
 
@@ -29,7 +30,13 @@ const EditBandPage: React.FC = () => {
 
     const fetchBand = async (bandId: number) => {
         try {
-            const response = await fetch(`https://back-k1a3.onrender.com/band/${bandId}/`);
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const response = await fetch(`https://back-k1a3.onrender.com/band/${bandId}/`, {
+                headers: myHeaders,
+            });
             if (!response.ok) {
                 throw new Error('Error fetching band');
             }
@@ -47,36 +54,39 @@ const EditBandPage: React.FC = () => {
             if (!band) {
                 throw new Error('Band data is not available');
             }
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+            myHeaders.append("Content-Type", "application/json");
+
             const response = await fetch(`https://back-k1a3.onrender.com/band/${band.id}/`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: myHeaders,
                 body: JSON.stringify(updatedBand),
             });
             if (!response.ok) {
                 throw new Error('Error updating band');
             }
-            router.push('/admin/bands'); // Cambia a la ruta de la lista de bandas
+            router.push('/admin/bands');
         } catch (error) {
             console.error('Failed to update band:', error);
         }
     };
-    
+
 
     if (loading) {
-        return <p>Cargando datos de la banda...</p>;
+        return <p id="loading-message">Cargando datos de la banda...</p>;
     }
 
     return (
-        <div className="flex flex-col min-h-screen">
-            <main className="flex-grow container mx-auto p-4">
-                <h1 className="title">Editar banda</h1>
-                <div className="form-container">
+        <div id="edit-band" className="flex flex-col min-h-screen">
+            <main id="main-content" className="flex-grow container mx-auto p-4">
+                <h1 id="title" className="title">Editar banda</h1>
+                <div id="edit-form" className="form-container">
                     {band ? (
-                        <BandForm band={band} onSave={updateBand} />
+                        <BandForm id="band-form" band={band} onSave={updateBand} />
                     ) : (
-                        <p>No se encontraron datos de la banda.</p>
+                        <p id="no-data-message">No se encontraron datos de la banda.</p>
                     )}
                 </div>
             </main>

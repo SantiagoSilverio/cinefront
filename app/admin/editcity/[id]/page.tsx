@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 import CityForm from '../../../components/cities/CityForm'; // Asegúrate de tener este componente
 import { City } from '../../../types/cities';
-import '../../newactor/nuevoactor.css'; 
+import '../../general.css';
 
 const EditCityPage: React.FC = () => {
     const router = useRouter();
@@ -29,10 +30,16 @@ const EditCityPage: React.FC = () => {
 
     const fetchCity = async (cityId: number) => {
         try {
-            const response = await fetch(`https://back-k1a3.onrender.com/city/${cityId}/`);
-            if (!response.ok) {
-                throw new Error('Error fetching city');
-            }
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+
+            const response = await fetch(`https://back-k1a3.onrender.com/city/${cityId}/`, {
+            headers: myHeaders,
+            });
+        if (!response.ok) {
+            throw new Error('Error fetching city');
+        }
             const data: City = await response.json();
             setCity(data);
             setLoading(false);
@@ -47,35 +54,40 @@ const EditCityPage: React.FC = () => {
             if (!city) {
                 throw new Error('City data is not available');
             }
+            const token = Cookies.get('access_token');
+            const myHeaders = new Headers();
+            myHeaders.append("Authorization", `Bearer ${token}`);
+            myHeaders.append("Content-Type", "application/json");
+
             const response = await fetch(`https://back-k1a3.onrender.com/city/${city.id}/`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: myHeaders,
                 body: JSON.stringify(updatedCity),
             });
             if (!response.ok) {
-                throw new Error('Error updating city');
+                console.log('Error respuesta servidor:', await response.text());
+                throw new Error('Error updating City');
             }
-            router.push('/admin/cities'); // Cambia a la ruta de la lista de ciudades
+            alert('Ciudad editada con éxito');
+            router.push('/admin/cities');
         } catch (error) {
             console.error('Failed to update city:', error);
         }
     };
 
     if (loading) {
-        return <p>Cargando datos de la ciudad...</p>;
+        return <p id="loading-message">Cargando datos de la ciudad...</p>;
     }
 
     return (
-        <div className="flex flex-col min-h-screen">
-            <main className="flex-grow container mx-auto p-4">
-                <h1 className="title">Editar ciudad</h1>
-                <div className="form-container">
+        <div id="edit-city" className="flex flex-col min-h-screen">
+            <main id="main-content" className="flex-grow container mx-auto p-4">
+                <h1 id="title" className="title">Editar ciudad</h1>
+                <div id="edit-form" className="form-container">
                     {city ? (
-                        <CityForm city={city} onSave={updateCity} />
+                        <CityForm id="city-form" city={city} onSave={updateCity} />
                     ) : (
-                        <p>No se encontraron datos de la ciudad.</p>
+                        <p id="no-data-message">No se encontraron datos de la ciudad.</p>
                     )}
                 </div>
             </main>

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 import UserForm from '../../../components/users/UserForm';
 import { User } from '../../../types/users';
 
@@ -28,7 +29,13 @@ const EditUserPage: React.FC = () => {
 
       const fetchUser = async (userId: number) => {
             try {
-                  const response = await fetch(`https://back-k1a3.onrender.com/user/${userId}/`);
+                  const token = Cookies.get('access_token');
+                  const myHeaders = new Headers();
+                  myHeaders.append("Authorization", `Bearer ${token}`);
+
+                  const response = await fetch(`https://back-k1a3.onrender.com/user/${userId}/`, {
+                        headers: myHeaders,
+                  });
                   if (!response.ok) {
                         throw new Error('Error fetching user');
                   }
@@ -46,15 +53,19 @@ const EditUserPage: React.FC = () => {
                   if (!user) {
                         throw new Error('User data is not available');
                   }
+                  const updatedUserData = { ...updatedUser, city_id: updatedUser.cityId };
+                  const token = Cookies.get('access_token');
+                  const myHeaders = new Headers();
+                  myHeaders.append("Authorization", `Bearer ${token}`);
+                  myHeaders.append("Content-Type", "application/json");
+
                   const response = await fetch(`https://back-k1a3.onrender.com/user/${user.id}/`, {
                         method: 'PUT',
-                        headers: {
-                              'Content-Type': 'application/json',
-                        },
+                        headers: myHeaders,
                         body: JSON.stringify(updatedUser),
                   });
                   if (!response.ok) {
-                        throw new Error('Error updating user');
+                        throw new Error('Error updating User');
                   }
                   alert('Usuario actualizado exitosamente');
                   router.push('/admin/users');
@@ -64,18 +75,18 @@ const EditUserPage: React.FC = () => {
       };
 
       if (loading) {
-            return <p>Cargando datos del usuario...</p>;
+            return <p id="loading-message">Cargando datos del usuario...</p>;
       }
 
       return (
-            <div className="flex flex-col min-h-screen">
-                  <main className="flex-grow container mx-auto p-4">
-                        <h1 className="title">Editar usuario</h1>
-                        <div className="form-container">
+            <div id="edit-band"  className="flex flex-col min-h-screen">
+                  <main id="main-content" className="flex-grow container mx-auto p-4">
+                        <h1 id="title" className="title">Editar usuario</h1>
+                        <div id="edit-form"  className="form-container">
                               {user ? (
-                                    <UserForm user={user} onSave={updateUser} />
+                                    <UserForm id="user-form" user={user} onSave={updateUser} />
                               ) : (
-                                    <p>No se encontraron datos del usuario.</p>
+                                    <p id="no-data-message">No se encontraron datos del usuario.</p>
                               )}
                         </div>
                   </main>

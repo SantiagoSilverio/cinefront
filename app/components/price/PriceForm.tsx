@@ -26,7 +26,7 @@ const PriceForm: React.FC<PriceFormProps> = ({ price, onSave }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="price-form">
+        <form id="price-form"  onSubmit={handleSubmit} className="price-form">
             <input
                 type="text"
                 value={name}
