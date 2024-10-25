@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ProvinceForm from '../../../components/province/ProvinceForm';
 import Cookies from 'js-cookie';
-import { Province, Country } from '../../../types/country';
+import { Province, Country, ProvinceAdd } from '../../../types/country';
 
 
 const EditProvincePage: React.FC = () => {
@@ -71,6 +71,9 @@ const EditProvincePage: React.FC = () => {
     };
 
     const updateProvince = async (updatedProvince: ProvinceAdd) => {
+
+
+
         try {
             if (!province) {
                 throw new Error('Province data is not available');
