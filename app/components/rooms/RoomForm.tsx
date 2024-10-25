@@ -16,8 +16,15 @@ const RoomForm: React.FC<RoomFormProps> = ({ room, onSave }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave({ number_rooms: numberRooms, seat_capacity: seatCapacity, type_screens: typeScreens, state, id_cin: cinemaId });
-  };
+    onSave({
+        number_rooms: numberRooms,
+        seat_capacity: seatCapacity,
+        type_screens: typeScreens,
+        state,
+        id_cin: cinemaId // Asegúrate de que esta propiedad exista en RoomAdd
+    });
+};
+
 
   return (
 

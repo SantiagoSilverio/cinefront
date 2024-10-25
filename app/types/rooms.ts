@@ -9,11 +9,12 @@ export interface Room {
 }
 
   
-  export interface RoomAdd {
-    number_rooms: number;
-    seat_capacity: number;
-    type_screens: string;
-    state: boolean;
-    cinema_id: number; // fk referencing the cinema
-  }
+export interface RoomAdd {
+  number_rooms: number;
+  seat_capacity: number;
+  type_screens: string;
+  state: boolean;
+  id_cin: number; // Asegúrate de que esto esté presente
+}
+
   
