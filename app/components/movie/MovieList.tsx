@@ -3,15 +3,16 @@ import Link from 'next/link';
 import { Movie } from '../../types/movie';
 import '../../admin/movie/movie.css';
 
-interface MovieListProps {
+export interface MovieListProps {
     movies: Movie[];
+    onEdit: (movie: Movie) => React.ReactNode;
     onDelete: (id: number) => void;
     onSort: (column: string) => void;
     sortColumn: string | null;
     sortOrder: 'asc' | 'desc';
 }
 
-const MovieList: React.FC<MovieListProps> = ({ movies, onDelete, onSort, sortColumn, sortOrder }) => {
+const MovieList: React.FC<MovieListProps> = ({ movies, onEdit, onDelete, onSort, sortColumn, sortOrder }) => {
     return (
         <table className="table-margin table-striped table-centered">
             <thead>
