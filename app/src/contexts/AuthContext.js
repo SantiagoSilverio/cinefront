@@ -1,7 +1,8 @@
 'use client'; // Asegura que todo este archivo sea del lado del cliente
+
 import { createContext, useContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { login as apiLogin, logout as apiLogout } from '../services/api'; // Funciones de login y logout desde un archivo de servicios
+import { login as apiLogin, logout as apiLogout } from '../services/api'; // Asegúrate de que las funciones apiLogin y apiLogout estén definidas
 
 const AuthContext = createContext(null);
 
@@ -12,9 +13,8 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const token = Cookies.get('access_token');
     if (token) {
-      // Si hay token, podrías obtener datos del usuario desde la API
       // Aquí podrías hacer una llamada real para obtener los datos del usuario
-      setUser({ username: 'Usuario autenticado' });
+      setUser({ username: 'Usuario autenticado' }); // Simulando un usuario autenticado
     }
     setLoading(false); // Deja de estar en estado de carga
   }, []);

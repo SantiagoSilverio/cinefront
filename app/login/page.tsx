@@ -1,6 +1,6 @@
 "use client";
 import { useAuth } from "../src/contexts/AuthContext";
-import React, { useState } from "react";
+import { useState } from 'react';
 import { useRouter } from "next/navigation";
 import { FaExclamationTriangle } from "react-icons/fa";
 import Swal from "sweetalert2";
