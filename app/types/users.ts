@@ -8,7 +8,9 @@ export interface UserAdd {
       address: string;
       city_id: string; // Add this line
   }
-
+  export interface City {
+      name: string; // or any other relevant properties
+  }
 export interface User {
       id: number;
       username: string;
@@ -20,5 +22,6 @@ export interface User {
       address: string;
       city_id?: string; // Make sure to add this line
       state?: boolean; // If applicable
-      city?: string;
+      city: City; 
 }
+
