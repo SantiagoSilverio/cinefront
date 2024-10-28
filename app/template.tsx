@@ -9,11 +9,6 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const isLoginPage = pathname === "/login"; // Verificamos si estamos en login
 
   return (
-    <>
-    {}
-      {!isLoginPage && <Navbar />}
-      {children}
-      {!isLoginPage && <Footer />}
-    </>
+
   );
 }
