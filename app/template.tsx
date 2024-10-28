@@ -8,7 +8,4 @@ export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isLoginPage = pathname === "/login"; // Verificamos si estamos en login
 
-  return (
-
-  );
 }
