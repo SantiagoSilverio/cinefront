@@ -3,7 +3,12 @@ const nextConfig = {
   images: {
     domains: ['image.tmdb.org'],
   },
-  swcMinify: false, // Desactivar minificación para debug en producción
+  webpack(config, { dev }) {
+    if (!dev) {
+      config.mode = 'development'; // Fuerza modo desarrollo en producción
+    }
+    return config;
+  },
 };
 
 export default nextConfig;
