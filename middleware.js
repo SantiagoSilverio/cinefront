@@ -21,7 +21,7 @@ export async function middleware(request) {
 
   // Verifica permisos si tiene token
   if (token) {
-    const url = new URL('https://back-k1a3.onrender.com/profile/', request.url);
+    const url = new URL('https://back-k1a3.onrender.com/profile', request.url);
     const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`,
