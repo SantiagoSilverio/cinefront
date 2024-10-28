@@ -24,8 +24,8 @@ export async function middleware(request) {
     const url = new URL('https://back-k1a3.onrender.com/user/', request.url);
     const response = await fetch(url, {
       headers: {
-        Authorization: Bearer ${token},
-      },
+        Authorization: `Bearer ${token}`,
+      }
     });
 
     if (response.ok) {
