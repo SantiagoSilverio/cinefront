@@ -1,18 +1,33 @@
 "use client";
 import { useAuth } from "../src/contexts/AuthContext";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { FaExclamationTriangle } from "react-icons/fa";
 import Swal from "sweetalert2";
-import Cookies from "js-cookie";
+
+// Type definitions
+interface FormData {
+  username: string;
+  password: string;
+  email: string;
+  name: string;
+  phone: string;
+  address: string;
+  city: string;
+}
+
+interface ApiResponse {
+  access?: string;
+  message?: string;
+}
 
 const LoginRegister = () => {
   const router = useRouter();
   const { login } = useAuth();
   
-  // Form states
+  // Initialize state with proper typing
   const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     username: "",
     password: "",
     email: "",
@@ -22,50 +37,76 @@ const LoginRegister = () => {
     city: ""
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Toast configuration
-  const showToast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    }
-  });
+  // Toast configuration - memoized to prevent recreating on each render
+  const showToast = useCallback(() => {
+    return Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+  }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Memoized handler for input changes
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
-  };
+  }, []);
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Loading state handler
+  const handleLoading = useCallback(async (promise: Promise<any>, loadingMessage: string) => {
+    setIsLoading(true);
+    const toast = showToast();
+    
     try {
-      showToast.fire({
-        title: "Verificando Credenciales...",
+      toast.fire({
+        title: loadingMessage,
         text: "Por favor espera",
         allowOutsideClick: false,
         didOpen: () => {
-          showToast.showLoading();
+          toast.showLoading();
         },
       });
 
-      const data = await login(formData.username, formData.password);
+      const result = await promise;
+      toast.close();
+      return result;
+    } catch (error) {
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  }, [showToast]);
 
-      if (!data || !data.access) {
+  // Login handler with proper error handling
+  const handleLogin = useCallback(async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage("");
+
+    try {
+      const loginResult = await handleLoading(
+        login(formData.username, formData.password),
+        "Verificando Credenciales..."
+      );
+
+      if (!loginResult?.access) {
         throw new Error("No se pudo obtener el token de acceso");
       }
 
       const profileResponse = await fetch("https://back-k1a3.onrender.com/profile", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${data.access}`,
+          Authorization: `Bearer ${loginResult.access}`,
           "Content-Type": "application/json",
         },
       });
@@ -75,59 +116,49 @@ const LoginRegister = () => {
       }
 
       const profileData = await profileResponse.json();
-      showToast.close();
-
-      const userIsAdmin = profileData.groups.some(
+      const userIsAdmin = profileData.groups?.some(
         (group: { name: string }) => group.name === "administrador"
       );
 
       router.push(userIsAdmin ? "/admin" : "/");
     } catch (error) {
       console.error("Error durante el login:", error);
-      showToast.fire({
+      const toast = showToast();
+      toast.fire({
         icon: "error",
         title: "Error de conexión",
-        text: "No se pudo conectar con el servidor. Por favor, intente nuevamente más tarde.",
+        text: error instanceof Error ? error.message : "Error inesperado",
         confirmButtonText: "Aceptar",
       });
     }
-  };
+  }, [formData, login, router, handleLoading, showToast]);
 
-  const handleRegister = async (e: React.FormEvent) => {
+  // Register handler with proper error handling
+  const handleRegister = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
     
     try {
-      showToast.fire({
-        title: "Procesando registro...",
-        text: "Por favor espera",
-        allowOutsideClick: false,
-        didOpen: () => {
-          showToast.showLoading();
-        },
-      });
-
-      const response = await fetch("https://back-k1a3.onrender.com/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
-          phone: formData.phone,
-          address: formData.address,
-          city: formData.city,
-          password: formData.password,
+      await handleLoading(
+        fetch("https://back-k1a3.onrender.com/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            email: formData.email,
+            phone: formData.phone,
+            address: formData.address,
+            city: formData.city,
+            password: formData.password,
+          }),
         }),
-      });
+        "Procesando registro..."
+      );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Error en el registro");
-      }
-
-      showToast.fire({
+      const toast = showToast();
+      toast.fire({
         icon: "success",
         title: "Registro exitoso",
         text: "¡Puedes iniciar sesión ahora!",
@@ -135,13 +166,14 @@ const LoginRegister = () => {
 
       setIsLogin(true);
     } catch (error) {
-      showToast.fire({
+      const toast = showToast();
+      toast.fire({
         icon: "error",
         title: "Error",
         text: error instanceof Error ? error.message : "Ocurrió un error inesperado",
       });
     }
-  };
+  }, [formData, handleLoading, showToast]);
 
   return (
     <div className="relative flex h-screen overflow-hidden">
@@ -171,6 +203,7 @@ const LoginRegister = () => {
                   value={formData.username}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full rounded-md border text-black"
+                  disabled={isLoading}
                 />
               </div>
               <div>
@@ -183,20 +216,23 @@ const LoginRegister = () => {
                   value={formData.password}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full rounded-md border text-black"
+                  disabled={isLoading}
                 />
               </div>
             </div>
             <div className="flex flex-col items-center gap-4">
               <button
                 type="submit"
-                className="w-full py-2 px-4 bg-green-500 text-white rounded-md"
+                className="w-full py-2 px-4 bg-green-500 text-white rounded-md disabled:opacity-50"
+                disabled={isLoading}
               >
-                Iniciar sesión
+                {isLoading ? "Procesando..." : "Iniciar sesión"}
               </button>
               <button
                 type="button"
                 onClick={() => setIsLogin(false)}
-                className="w-full py-2 px-4 bg-green-500 text-white rounded-md"
+                className="w-full py-2 px-4 bg-green-500 text-white rounded-md disabled:opacity-50"
+                disabled={isLoading}
               >
                 Registrarse
               </button>
@@ -226,20 +262,23 @@ const LoginRegister = () => {
                   value={formData[field as keyof typeof formData]}
                   onChange={handleInputChange}
                   className="mt-1 p-2 w-full rounded-md border text-black"
+                  disabled={isLoading}
                 />
               </div>
             ))}
             <div className="flex flex-col items-center gap-4">
               <button
                 type="submit"
-                className="w-full py-2 px-4 bg-pink-400 text-white rounded-md"
+                className="w-full py-2 px-4 bg-pink-400 text-white rounded-md disabled:opacity-50"
+                disabled={isLoading}
               >
-                Registrarse
+                {isLoading ? "Procesando..." : "Registrarse"}
               </button>
               <button
                 type="button"
                 onClick={() => setIsLogin(true)}
-                className="w-full py-2 px-4 bg-pink-400 text-white rounded-md"
+                className="w-full py-2 px-4 bg-pink-400 text-white rounded-md disabled:opacity-50"
+                disabled={isLoading}
               >
                 Volver al login
               </button>
