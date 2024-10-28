@@ -1,14 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ['image.tmdb.org'],
-  },
-  webpack(config, { dev }) {
-    if (!dev) {
-      config.mode = 'development'; // Fuerza modo desarrollo en producción
-    }
-    return config;
-  },
-};
+      images: {
+        domains: ['image.tmdb.org'], // Agrega este dominio
+      },
+    };
 
-export default nextConfig;
+    export default nextConfig;
