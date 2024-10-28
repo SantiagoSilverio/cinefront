@@ -32,7 +32,7 @@ export async function middleware(request) {
       const data = await response.json();
       const groups = data.groups; 
 
-      if (groups.includes(1)) { 
+      if (groups.includes('administrador')) {
         // Si es administrador y no está en /admin, redirige a /admin
         if (pathname !== '/admin') {
           return NextResponse.redirect(new URL('/admin', request.url));
