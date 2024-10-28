@@ -24,23 +24,27 @@ export async function middleware(request) {
     const url = new URL('https://back-k1a3.onrender.com/user/', request.url);
     const response = await fetch(url, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: Bearer ${token},
       },
     });
 
     if (response.ok) {
       const data = await response.json();
-      const groups = data.groups;
+      const groups = data.groups; 
 
       if (groups.includes(1)) { 
-        // Si es administrador, redirige a /admin
+        // Si es administrador y no está en /admin, redirige a /admin
         if (pathname !== '/admin') {
           return NextResponse.redirect(new URL('/admin', request.url));
+        } else {
+          return NextResponse.next();
         }
       } else {
-        // Si no es administrador, redirige a /
+        // Si no es administrador y está en /admin, redirige a /
         if (pathname === '/admin') {
           return NextResponse.redirect(new URL('/', request.url));
+        } else {
+          return NextResponse.next();
         }
       }
     } else {
