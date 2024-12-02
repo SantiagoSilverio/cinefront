@@ -51,7 +51,7 @@ export default function Home() {
           behavior: 'smooth'
         });
       }
-    } else { // Scrolling up
+    } else { // Scrolling u
       if (currentSection === 1) {
         setCurrentSection(0);
         window.scrollTo({

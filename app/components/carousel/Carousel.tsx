@@ -80,7 +80,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ posters, logos }) => {
             className="relative flex justify-start items-center w-full h-full cursor-pointer"
             onClick={() => handleClick(poster.id)}
           >
-            {/* Background Image */}
+            {/* Background Imag */}
             <div className="absolute inset-0">
               <Image
                 src={logos[index]?.src || '/path/to/default/image.jpg'}
