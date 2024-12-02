@@ -107,7 +107,7 @@ const MovieCarousel: React.FC<MovieCarouselProps> = ({ posters, logos }) => {
                 />
               </div>
 
-              {/* Text Content */}
+              {/* Text Conten */}
               <div className="flex flex-col justify-center ml-4 md:ml-8 lg:ml-12 mt-4 md:mt-0">
                 <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4 animate-slideUp text-left">
                   {poster.alt}
