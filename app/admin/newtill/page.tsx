@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import TillForm from '../../../components/tills/TillForm';
+import TillForm from '../../components/tills/TillForm';
 import Cookies from 'js-cookie';
-import { TillAdd } from '../../../types/tills';
+import { TillAdd } from '../../types/tills';
 import './nuevotills.css';
 
 const NewTillPage: React.FC = () => {

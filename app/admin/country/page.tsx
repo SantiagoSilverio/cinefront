@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import CountryList from '../../../components/country/CountryList'; // Ajusta la ruta según sea necesario
-import Pagination from '../../../components/pagination/pagination'; // Ajusta la ruta según sea necesario
+import CountryList from '../../components/country/CountryList'; // Ajusta la ruta según sea necesario
+import Pagination from '../../components/pagination/pagination'; // Ajusta la ruta según sea necesario
 import Link from 'next/link';
-import { Country } from '../../../types/country'; // Ajusta la ruta según sea necesario
+import { Country } from '../../types/country'; // Ajusta la ruta según sea necesario
 import '../general.css';
 import Cookies from 'js-cookie';
 
@@ -130,15 +130,15 @@ const CountryPage: React.FC = () => {
                             />
                         </div>
                     </div>
-
                     <CountryList
                         countries={filteredCountries}
-                        onEdit={handleEdit}
+                        onEdit={handleEdit} // Asegúrate de pasar esta propiedad
                         onDelete={handleDelete}
                         onSort={handleSort}
                         sortColumn={sortColumn}
                         sortOrder={sortOrder}
                     />
+
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}

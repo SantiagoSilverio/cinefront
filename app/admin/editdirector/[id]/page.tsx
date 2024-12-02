@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import DirectorForm from '../../../../components/director/DirectorForm';
+import DirectorForm from '../../../components/director/DirectorForm';
 import Cookies from 'js-cookie';
-import { Director } from '../../../../types/director';
+import { Director } from '../../../types/director';
 import '../../newdirector/nuevodirector.css';
 
 const EditDirectorPage: React.FC = () => {
@@ -84,7 +84,7 @@ const EditDirectorPage: React.FC = () => {
                 <h1 id="title" className="title">Editar director</h1>
                 <div id="edit-form" className="form-container">
                     {director ? (
-                        <DirectorForm id="director-form" director={director} onSave={updateDirector} />
+                        <DirectorForm key="director-form" director={director} onSave={updateDirector} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos del director.</p>
                     )}

@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
-import CityForm from '../../../../components/cities/CityForm'; // Asegúrate de tener este componente
-import { City } from '../../../../types/cities';
+import CityForm from '../../../components/cities/CityForm'; // Asegúrate de tener este componente
+import { City } from '../../../types/cities';
 import '../../general.css';
 
 const EditCityPage: React.FC = () => {
@@ -85,7 +85,7 @@ const EditCityPage: React.FC = () => {
                 <h1 id="title" className="title">Editar ciudad</h1>
                 <div id="edit-form" className="form-container">
                     {city ? (
-                        <CityForm id="city-form" city={city} onSave={updateCity} />
+                        <CityForm key="city-form" city={city} onSave={updateCity} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos de la ciudad.</p>
                     )}

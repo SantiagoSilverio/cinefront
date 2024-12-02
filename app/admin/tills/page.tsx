@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import TillList from '../../../components/tills/TillList';
-import Pagination from '../../../components/pagination/pagination';
+import TillList from '../../components/tills/TillList';
+import Pagination from '../../components/pagination/pagination';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { Till } from '../../../types/tills';
-
+import { Till } from '../../types/tills';
 
 const TillsPage: React.FC = () => {
       const [tills, setTills] = useState<Till[]>([]);

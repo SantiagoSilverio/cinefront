@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
-import PriceForm from '../../../../components/price/PriceForm';
-import { Price } from '../../../../types/price';
+import PriceForm from '../../../components/price/PriceForm';
+import { Price } from '../../../types/price';
 import '../../newprice/nuevoprice.css'; // Usa el mismo CSS que para la otra página
 
 

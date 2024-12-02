@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import BandList from '../../../components/bands/BandList'; // Ajusta la ruta
-import Pagination from '../../../components/pagination/pagination'; // Ajusta la ruta
+import BandList from '../../components/bands/BandList'; // Ajusta la ruta
+import Pagination from '../../components/pagination/pagination'; // Ajusta la ruta
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { Band } from '../../../types/bands'; // Cambia el import a 'bands'
+import { Band } from '../../types/bands'; // Cambia el import a 'bands'
 import '../general.css'; // Cambia la ruta si usas un archivo CSS específico
 
 

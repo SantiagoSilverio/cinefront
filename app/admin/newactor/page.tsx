@@ -1,13 +1,12 @@
 "use client";
+
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import ActorForm from '../../../components/actors/ActorForm';
+import ActorForm from '../../components/actors/ActorForm';
 import Cookies from 'js-cookie';
-import { ActorAdd } from '../../../types/actors';
+import { ActorAdd } from '../../types/actors';
 import './nuevoactor.css';
 
 const NewActorPage: React.FC = () => {
-      const router = useRouter();
       const [actors, setActors] = useState<ActorAdd[]>([]);
 
       const addActor = async (actor: ActorAdd) => {
@@ -28,7 +27,6 @@ const NewActorPage: React.FC = () => {
                   const newActor = await response.json();
                   setActors([...actors, newActor]);
                   alert('Actor guardado de manera exitosa');
-                  router.push('/admin/actors');
             } catch (error) {
                   console.error('Failed to add actor:', error);
             }

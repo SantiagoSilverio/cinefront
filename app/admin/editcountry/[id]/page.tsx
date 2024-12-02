@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
-import CountryForm from '../../../../components/country/CountryForm';
-import { Country } from '../../../../types/country';
+import CountryForm from '../../../components/country/CountryForm';
+import { Country } from '../../../types/country';
 import '../../newcountry/nuevocountry.css'; // Usa el mismo CSS que para la otra página
 
 const EditCountryPage: React.FC = () => {
@@ -84,7 +84,7 @@ const EditCountryPage: React.FC = () => {
                 <h1 id="title" className="title">Editar país</h1>
                 <div id="edit-form" className="form-container">
                     {country ? (
-                        <CountryForm id="country-form" country={country} onSave={updateCountry} />
+                        <CountryForm key="country-form" country={country} onSave={updateCountry} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos del país.</p>
                     )}

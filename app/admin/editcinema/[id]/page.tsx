@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import CinemaForm from '../../../../components/cinemas/CinemaForm';
+import CinemaForm from '../../../components/cinemas/CinemaForm';
 import Cookies from 'js-cookie';
-import { Cinema } from '../../../../types/cinemas';
+import { Cinema } from '../../../types/cinemas';
 import '../../newcinema/nuevocinema.css'; 
 
 const EditCineamaPage: React.FC = () => {
@@ -84,7 +84,7 @@ const EditCineamaPage: React.FC = () => {
                 <h1 id="title" className="title">Editar cine</h1>
                 <div id="edit-form"  className="form-container">
                     {cinema ? (
-                        <CinemaForm id="cinema-form" cinema={cinema} onSave={updateCinema} />
+                        <CinemaForm key="cinema-form" cinema={cinema} onSave={updateCinema} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos del cine.</p>
                     )}

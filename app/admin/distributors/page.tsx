@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import DistributorList from '../../../components/distributors/DistributorList';
-import Pagination from '../../../components/pagination/pagination';
+import DistributorList from '../../components/distributors/DistributorList';
+import Pagination from '../../components/pagination/pagination';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { Distributor } from '../../../types/distributors';
+import { Distributor } from '../../types/distributors';
 import '../general.css';
 
 const DistributorsPage: React.FC = () => {

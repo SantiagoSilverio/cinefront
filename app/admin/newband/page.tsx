@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import BandForm from '../../../components/bands/BandForm';
+import BandForm from '../../components/bands/BandForm';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { BandAdd } from '../../../types/bands';
+import { BandAdd } from '../../types/bands';
 import './nuevabanda.css'; 
 
 const NewBandPage: React.FC = () => {

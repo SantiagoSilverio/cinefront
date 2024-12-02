@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
-import DistributorForm from '../../../../components/distributors/DistributorForm'; // Ajusta la ruta para distribuidores
-import { Distributor } from '../../../../types/distributors';
+import DistributorForm from '../../../components/distributors/DistributorForm'; // Ajusta la ruta para distribuidores
+import { Distributor } from '../../../types/distributors';
 import '../../newcountry/nuevocountry.css';
 
 const EditDistributorPage: React.FC = () => {

@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import DistributorForm from '../../../components/distributors/DistributorForm'; // Ajusta la ruta para distribuidores
+import DistributorForm from '../../components/distributors/DistributorForm'; // Ajusta la ruta para distribuidores
 import Cookies from 'js-cookie';
-import { DistributorAdd } from '../../../types/distributors';
+import { DistributorAdd } from '../../types/distributors';
 import './nuevodistributor.css'; // Usa el mismo CSS
 
 const NewDistributorPage: React.FC = () => {

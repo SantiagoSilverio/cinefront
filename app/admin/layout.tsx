@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from '../../components/sidebar/Sidebar';
+import Sidebar from '../components/sidebar/Sidebar';
 import { Inter } from 'next/font/google';
 import '../globals.css';
 

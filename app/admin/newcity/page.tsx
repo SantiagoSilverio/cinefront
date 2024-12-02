@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import CityForm from '../../../components/cities/CityForm';
+import CityForm from '../../components/cities/CityForm';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { CityAdd } from '../../../types/cities';
+import { CityAdd } from '../../types/cities';
 import '../newactor/nuevoactor.css';
 
 const NewCityPage: React.FC = () => {
@@ -22,8 +22,8 @@ const NewCityPage: React.FC = () => {
                         name: city.name,
                         prefix: city.prefix,
                         postal_code: city.postal_code,
-                        province: city.province_id,
-                  };
+                        province: city.province, // Cambiado a `province`
+                    };
 
                   const response = await fetch('https://back-k1a3.onrender.com/city/', {
                         method: 'POST',

@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import UserList from '../../../components/users/UserList';
-import Pagination from '../../../components/pagination/pagination';
+import UserList from '../../components/users/UserList';
+import Pagination from '../../components/pagination/pagination';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { User } from '../../../types/users';
+import { User } from '../../types/users';
 import '../general.css';
 
 const UsersPage: React.FC = () => {
@@ -81,13 +81,24 @@ const UsersPage: React.FC = () => {
             const order = sortColumn === column && sortOrder === 'asc' ? 'desc' : 'asc';
             setSortOrder(order);
             setSortColumn(column);
-            const sortedUsers = [...users].sort((a, b) => {
-                  if (a[column as keyof User] < b[column as keyof User]) return order === 'asc' ? -1 : 1;
-                  if (a[column as keyof User] > b[column as keyof User]) return order === 'asc' ? 1 : -1;
-                  return 0;
-            });
-            setUsers(sortedUsers);
-      };
+        
+            if (users.length > 0 && column in users[0]) {
+                const sortedUsers = [...users].sort((a, b) => {
+                    const aValue = a[column as keyof User] ?? ''; // Fallback to '' if undefined
+                    const bValue = b[column as keyof User] ?? ''; // Fallback to '' if undefined
+        
+                    if (aValue < bValue) return order === 'asc' ? -1 : 1;
+                    if (aValue > bValue) return order === 'asc' ? 1 : -1;
+                    return 0;
+                });
+        
+                setUsers(sortedUsers);
+            } else {
+                console.warn(`Invalid column: ${column}`);
+            }
+        };
+        
+        
       const handlePageChange = (page: number) => {
             setCurrentPage(page);
       };
@@ -126,7 +137,6 @@ const UsersPage: React.FC = () => {
                               </div>
 
                               <UserList
-                                    id="lista-users"
                                     users={filteredUsers}
                                     onEdit={handleEdit}
                                     onDelete={handleDelete}
@@ -135,12 +145,13 @@ const UsersPage: React.FC = () => {
                                     sortOrder={sortOrder}
                               />
 
+
                               <Pagination
-                                    id="pagination-nav"
                                     currentPage={currentPage}
                                     totalPages={totalPages}
                                     onPageChange={handlePageChange}
                               />
+
 
                               <Link href="/admin">
                                     <button className="bg-gray-300 text-gray-700 rounded-md px-3 py-2 hover:bg-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-300">

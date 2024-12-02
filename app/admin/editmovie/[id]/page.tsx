@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import MovieForm from '../../../../components/movie/MovieForm';
+import MovieForm from '../../../components/movie/MovieForm';
 import Link from 'next/link';
-import { Movie } from '../../../../types/movie';
+import { Movie } from '../../../types/movie';
 import '../../newmovie/nuevomovie.css'; // Usa el mismo CSS que para la página de nueva película
 
 const EditMoviePage: React.FC = () => {

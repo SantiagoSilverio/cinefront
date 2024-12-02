@@ -1,9 +1,9 @@
 "use client";  // Necesario si este componente maneja eventos en el cliente
 import React, { useState, useEffect } from 'react';
-import ReservationList from '../../../components/reservations/ReservationList';
-import Pagination from '../../../components/pagination/pagination';
+import ReservationList from '../../components/reservations/ReservationList';
+import Pagination from '../../components/pagination/pagination';
 import Link from 'next/link';
-import { Reservation } from '../../../types/reservations';
+import { Reservation } from '../../types/reservations';
 import '../general.css';
 
 const ReservationPage: React.FC = () => {

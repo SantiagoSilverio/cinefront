@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import PriceForm from '../../../components/price/PriceForm';
+import PriceForm from '../../components/price/PriceForm';
 import Cookies from 'js-cookie';
-import { PriceAdd } from '../../../types/price';
+import { PriceAdd } from '../../types/price';
 import './nuevoprice.css';
 
 const NewPricePage: React.FC = () => {

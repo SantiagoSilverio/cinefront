@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import ReservationForm from '../../../components/reservations/ReservationForm'; // Ajusta la ruta si es necesario
-import { ReservationAdd } from '../../../types/reservations';
+import ReservationForm from '../../components/reservations/ReservationForm'; // Ajusta la ruta si es necesario
+import { ReservationAdd } from '../../types/reservations';
 import '../newactor/nuevoactor.css'; // Ajusta la ruta si es necesario
 
 const NewReservation: React.FC = () => {

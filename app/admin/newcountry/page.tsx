@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import CountryForm from '../../../components/country/CountryForm';  // Cambiado a CountryForm
+import CountryForm from '../../components/country/CountryForm';  // Cambiado a CountryForm
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { CountryAdd } from '../../../types/country';  // Cambiado a CountryAdd
+import { CountryAdd } from '../../types/country';  // Cambiado a CountryAdd
 import './nuevocountry.css';  // Usando el CSS correspondiente para countries
 
 const NewCountryPage: React.FC = () => {
@@ -42,10 +42,10 @@ const NewCountryPage: React.FC = () => {
     };
 
     return (
-        <div id="new-country-page" className="flex flex-col min-h-screen">
-            <main id="new-country-content" className="flex-grow container mx-auto p-4">
-                <h1 id="new-country-title" className="title">Agregar nuevo país</h1>  {/* Cambiado el título */}
-                <div id="new-country-form-container" className="form-container">
+        <div className="flex flex-col min-h-screen">
+            <main className="flex-grow container mx-auto p-4">
+                <h1 className="title">Agregar nuevo país</h1>  {/* Cambiado el título */}
+                <div className="form-container">
                     <CountryForm onSave={handleAdd} />  {/* Cambiado a CountryForm */}
                 </div>
             </main>
