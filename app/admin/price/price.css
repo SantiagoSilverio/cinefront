@@ -1,0 +1,37 @@
+
+.prices-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .prices-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .new-price-button {
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    margin: start;
+    transition: background-color 0.3s ease;
+  }
+  
+  .new-price-button:hover {
+    background-color: #e91e63;
+  }
+  
+  .new-price-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
