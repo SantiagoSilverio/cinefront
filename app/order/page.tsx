@@ -1,8 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-
-import axios from 'axios';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import './order.css';
@@ -18,7 +16,7 @@ interface OrderDetails {
   total: number;
 }
 
-const Order = React.memo(() => {
+const Order: React.FC = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -70,7 +68,9 @@ const Order = React.memo(() => {
   }, [orderDetails.ticketNumber]);
 
   const generatePDF = useCallback(async () => {
-    if (ticketRef.current) {
+    if (!ticketRef.current) return;
+
+    try {
       const canvas = await html2canvas(ticketRef.current, {
         scale: 2,
         useCORS: true,
@@ -96,6 +96,9 @@ const Order = React.memo(() => {
       }
 
       pdf.save(`ticket_${orderDetails.ticketNumber}.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      throw error;
     }
   }, [orderDetails.ticketNumber]);
 
@@ -173,7 +176,7 @@ const Order = React.memo(() => {
             </div>
 
             <div className="ticket-warning">
-              <div className="warning-icon"> ⚠️ </div>
+              <div className="warning-icon">⚠️</div>
               <div className="warning-text">
                 CONSERVAR ESTE COMPROBANTE<br />
                 PARA MOSTRARLO EN VENTANILLA
@@ -187,13 +190,10 @@ const Order = React.memo(() => {
               <canvas id="qrCode"></canvas>
             </div>
           </div>
-
         </div>
       </div>
 
-      {error && (
-        <div className="error-message">{error}</div>
-      )}
+      {error && <div className="error-message">{error}</div>}
 
       <button
         className={`order-finish-button ${loading ? 'loading' : ''}`}
@@ -211,6 +211,8 @@ const Order = React.memo(() => {
       </button>
     </div>
   );
-});
+};
+
+Order.displayName = 'Order';
 
 export default Order;
