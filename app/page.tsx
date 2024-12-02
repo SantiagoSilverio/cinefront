@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import MovieCarousel from '../components/carousel/Carousel';
 import UpcomingReleases from '../components/upcomingreleases/UpcomingReleases';
-import { getCurrentMovies, getUpcomingMovies } from '../api/movies';
+import { getCurrentMovies, getUpcomingMovies } from './api/movies';
 import "./globals.css";
 
 interface Movie {
