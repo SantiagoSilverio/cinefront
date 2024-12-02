@@ -16,17 +16,14 @@
   }
 }
 
-
-html {
+html, body {
   margin: 0; /* Asegura que no haya márgenes predeterminados */
-  overflow-y: auto !important; 
 }
 
 body {
   font-family: 'Inter', sans-serif;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to top, #FFFFFF, #4AB4A3);
-  overflow-y: auto !important; 
 }
 
 @layer utilities {
@@ -85,41 +82,4 @@ body {
 /* Añadir color rosa al navbar */
 #navbar {
   background-color: #D5447B !important; /* Color rosa con prioridad */
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: black;
-  color: white;
-}
-
-.snap-y {
-  scroll-snap-type: y mandatory;
-}
-
-.snap-start {
-  scroll-snap-align: start;
-}
-
-/* Estilos para el scroll suave */
-.overflow-y-auto {
-  scrollbar-width: thin;
-  scrollbar-color: #D5447B rgba(255, 255, 255, 0.1);
-}
-
-.overflow-y-auto::-webkit-scrollbar {
-  width: 6px;
-}
-
-.overflow-y-auto::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-}
-
-.overflow-y-auto::-webkit-scrollbar-thumb {
-  background-color: #D5447B;
-  border-radius: 3px;
 }
