@@ -3,12 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
-import UserForm from '../../../components/users/UserForm';
-import { User } from '../../../types/users';
-
-const hasCity = (user: Partial<User>): user is User => {
-      return 'city' in user;
-};
+import UserForm from '../../../../components/users/UserForm';
+import { User } from '../../../../types/users';
 
 const EditUserPage: React.FC = () => {
       const router = useRouter();
@@ -51,20 +47,13 @@ const EditUserPage: React.FC = () => {
                   setLoading(false);
             }
       };
-      const hasCity = (user: Partial<User>): user is User => {
-            return 'city' in user;
-      };
+
       const updateUser = async (updatedUser: Partial<User>) => {
             try {
                   if (!user) {
                         throw new Error('User data is not available');
                   }
-
-                  const updatedUserData = {
-                        ...updatedUser,
-                        city_id: hasCity(updatedUser) ? updatedUser.city : undefined
-                  };
-
+                  const updatedUserData = { ...updatedUser, city_id: updatedUser.cityId };
                   const token = Cookies.get('access_token');
                   const myHeaders = new Headers();
                   myHeaders.append("Authorization", `Bearer ${token}`);
@@ -73,7 +62,7 @@ const EditUserPage: React.FC = () => {
                   const response = await fetch(`https://back-k1a3.onrender.com/user/${user.id}/`, {
                         method: 'PUT',
                         headers: myHeaders,
-                        body: JSON.stringify(updatedUserData),
+                        body: JSON.stringify(updatedUser),
                   });
                   if (!response.ok) {
                         throw new Error('Error updating User');
@@ -85,20 +74,17 @@ const EditUserPage: React.FC = () => {
             }
       };
 
-
-
-
       if (loading) {
             return <p id="loading-message">Cargando datos del usuario...</p>;
       }
 
       return (
-            <div id="edit-band" className="flex flex-col min-h-screen">
+            <div id="edit-band"  className="flex flex-col min-h-screen">
                   <main id="main-content" className="flex-grow container mx-auto p-4">
                         <h1 id="title" className="title">Editar usuario</h1>
-                        <div id="edit-form" className="form-container">
+                        <div id="edit-form"  className="form-container">
                               {user ? (
-                                    <UserForm key="user-form" user={user} onSave={updateUser} />
+                                    <UserForm id="user-form" user={user} onSave={updateUser} />
                               ) : (
                                     <p id="no-data-message">No se encontraron datos del usuario.</p>
                               )}

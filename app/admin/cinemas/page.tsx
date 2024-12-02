@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import CinemaList from '../../components/cinemas/CinemaList';
-import Pagination from '../../components/pagination/pagination';
+import CinemaList from '../../../components/cinemas/CinemaList';
+import Pagination from '../../../components/pagination/pagination';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { Cinema } from '../../types/cinemas';
+import { Cinema } from '../../../types/cinemas';
 import '../general.css';
 
 const CinemasPage: React.FC = () => {

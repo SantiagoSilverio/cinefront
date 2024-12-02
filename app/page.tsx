@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState, useRef } from 'react';
-import MovieCarousel from './components/carousel/Carousel';
-import UpcomingReleases from './components/upcomingreleases/UpcomingReleases';
-import { getCurrentMovies, getUpcomingMovies } from './api/movies';
+import MovieCarousel from '../components/carousel/Carousel';
+import UpcomingReleases from '../components/upcomingreleases/UpcomingReleases';
+import { getCurrentMovies, getUpcomingMovies } from '../api/movies';
 import "./globals.css";
 
 interface Movie {
@@ -51,7 +51,7 @@ export default function Home() {
           behavior: 'smooth'
         });
       }
-    } else { // Scrolling u
+    } else { // Scrolling up
       if (currentSection === 1) {
         setCurrentSection(0);
         window.scrollTo({

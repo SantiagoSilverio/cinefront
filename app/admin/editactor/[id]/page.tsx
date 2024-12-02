@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import ActorForm from '../../../components/actors/ActorForm';
+import ActorForm from '../../../../components/actors/ActorForm';
 import Cookies from 'js-cookie';
-import { Actor } from '../../../types/actors';
+import { Actor } from '../../../../types/actors';
+import '../../newactor/nuevoactor.css';
 
 
 const EditActorPage: React.FC = () => {
@@ -67,7 +68,7 @@ const EditActorPage: React.FC = () => {
             if (!response.ok) {
                 throw new Error('Error updating actor');
             }
-            alert('Actors editado con éxito');
+            alert('Actor editado con éxito');
             router.push('/admin/actors');
         } catch (error) {
             console.error('Failed to update actor:', error);
@@ -82,9 +83,9 @@ const EditActorPage: React.FC = () => {
         <div id="edit-actor" className="flex flex-col min-h-screen">
             <main id="main-content" className="flex-grow container mx-auto p-4">
                 <h1 id="title" className="title">Editar actor</h1>
-                <div id="edit-form"  className="form-container">
+                <div id="edit-form" c className="form-container">
                     {actor ? (
-                        <ActorForm key="actor-form" actor={actor} onSave={updateActor} />
+                        <ActorForm id="actor-form" actor={actor} onSave={updateActor} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos del actor.</p>
                     )}

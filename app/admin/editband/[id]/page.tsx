@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import BandForm from '../../../components/bands/BandForm';
+import BandForm from '../../../../components/bands/BandForm';
 import Cookies from 'js-cookie';
-import { Band } from '../../../types/bands';
+import { Band } from '../../../../types/bands';
 import '../../newband/nuevabanda.css'; // Reutiliza el mismo CSS
 
 const EditBandPage: React.FC = () => {
@@ -84,7 +84,7 @@ const EditBandPage: React.FC = () => {
                 <h1 id="title" className="title">Editar banda</h1>
                 <div id="edit-form" className="form-container">
                     {band ? (
-                        <BandForm key="band-form" band={band} onSave={updateBand} />
+                        <BandForm id="band-form" band={band} onSave={updateBand} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos de la banda.</p>
                     )}

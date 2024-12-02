@@ -1,51 +1,104 @@
 "use client";
-
-import React, { useState } from 'react';
-import ProjectionForm from '../../components/projections/ProjectionsForm'; // Asegúrate de tener este componente
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
-import { ProjectionAdd } from '../../types/projections'; // Asegúrate de tener este tipo
-import '../general.css'; 
-
+import { ProjectionAdd } from '../../../types/projection';
+import '../newroom/newroom.css'
+import ProjectionForm from '@/components/projection/ProjectionsForm';
 const NewProjectionPage: React.FC = () => {
-    const [projections, setProjections] = useState<ProjectionAdd[]>([]);
+    const router = useRouter();
+    const [rooms, setRooms] = useState<{ id: number; name: string }[]>([]);
+    const [prices, setPrices] = useState<{ id: number; name: string }[]>([]);
+    const [movies, setMovies] = useState<{ id: number; title: string }[]>([]);
 
-    const addProjection = async (projection: ProjectionAdd) => {
-        try {
-            const token = Cookies.get('access_token');
-            const myHeaders = new Headers();
-            myHeaders.append("Authorization", `Bearer ${token}`);
-            myHeaders.append("Content-Type", "application/json");
+    useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const token = Cookies.get('access_token');
+              if (!token) {
+                  console.error('No se encontró el token de acceso.');
+                  return;
+              }
 
-            const response = await fetch('https://back-k1a3.onrender.com/projection/', {
-                method: 'POST',
-                headers: myHeaders,
-                body: JSON.stringify(projection),
-            });
-            if (!response.ok) {
-                throw new Error('Error adding projection');
-            }
-            const newProjection = await response.json();
-            setProjections([...projections, newProjection]);
-            alert('Proyección guardada de manera exitosa');
-        } catch (error) {
-            console.error('Failed to add projection:', error);
-        }
-    };
+              const myHeaders = new Headers();
+              myHeaders.append('Authorization', `Bearer ${token}`);
+              myHeaders.append('Content-Type', 'application/json');
 
-    const handleAdd = (projection: ProjectionAdd) => {
-        addProjection(projection);
-    };
+              // Fetch rooms
+              const roomResponse = await fetch('https://back-k1a3.onrender.com/room/', {
+                  method: 'GET',
+                  headers: myHeaders,
+              });
+              const roomsData = await roomResponse.json();
+              setRooms(roomsData.results);
 
-    return (
-        <div className="flex flex-col min-h-screen">
-            <main className="flex-grow container mx-auto p-4">
-                <h1 className="title">Agregar nueva proyección</h1>
-                <div className="form-container">
-                    <ProjectionForm onSave={handleAdd} /> {/* Asegúrate de que este componente esté disponible */}
-                </div>
-            </main>
-        </div>
-    );
+              // Fetch prices
+              const priceResponse = await fetch('https://back-k1a3.onrender.com/price/', {
+                  method: 'GET',
+                  headers: myHeaders,
+              });
+              const pricesData = await priceResponse.json();
+              setPrices(pricesData.results);
+
+              // Fetch movies
+              const movieResponse = await fetch('https://back-k1a3.onrender.com/movie/', {
+                  method: 'GET',
+                  headers: myHeaders,
+              });
+              const moviesData = await movieResponse.json();
+              setMovies(moviesData.results);
+          } catch (error) {
+              console.error('Error al cargar los datos:', error);
+          }
+      };
+
+      fetchData();
+  }, []);
+  
+
+  const addProjection = async (projectionData: ProjectionAdd) => {
+    try {
+      const token = Cookies.get('access_token');
+      if (!token) {
+          console.error('No se encontró el token de acceso.');
+          return;
+      }
+
+      const myHeaders = new Headers();
+      myHeaders.append('Authorization', `Bearer ${token}`);
+      myHeaders.append('Content-Type', 'application/json');
+
+      const response = await fetch('https://back-k1a3.onrender.com/projection/', {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(projectionData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error en el backend:', errorData);
+        throw new Error('Error al agregar proyección');
+      }
+
+      const result = await response.json();
+      console.log('Proyección agregada correctamente:', result);
+      router.push('/admin/projections');
+    } catch (error) {
+      console.error('Error al agregar proyección:', error);
+      throw new Error('Error al agregar proyección');
+    }
+  };
+
+  return (
+    <div id="new-projection-page" className="flex flex-col min-h-screen">
+        <main id="new-projection-content" className="flex-grow container mx-auto p-4">
+            <h1 id="new-projection-title" className="title">Agregar nueva proyección</h1>
+            <div id="new-projection-form-container" className="form-container">
+                <ProjectionForm onSave={addProjection} rooms={rooms} prices={prices} movies={movies} />
+            </div>
+        </main>
+    </div>
+  );
 };
 
 export default NewProjectionPage;

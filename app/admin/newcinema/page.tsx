@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import CinemaForm from '../../components/cinemas/CinemaForm';
+import CinemaForm from '../../../components/cinemas/CinemaForm';
 import Cookies from 'js-cookie';
-import { CinemaAdd } from '../../types/cinemas';
+import { CinemaAdd } from '../../../types/cinemas';
 import './nuevocinema.css';
 
 const NewCinemaPage: React.FC = () => {

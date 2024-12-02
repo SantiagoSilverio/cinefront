@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import CityList from '../../components/cities/CityList';
-import Pagination from '../../components/pagination/pagination';
+import CityList from '../../../components/cities/CityList';
+import Pagination from '../../../components/pagination/pagination';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { City } from '../../types/cities';
+import { City } from '../../../types/cities';
 import '../general.css';
 
 const CitiesPage: React.FC = () => {

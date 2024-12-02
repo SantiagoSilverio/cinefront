@@ -1,9 +1,7 @@
-"use client";
-
 import React, { useState, useEffect } from 'react';
-import ReservationForm from '../../../components/reservations/ReservationForm';
+import ReservationForm from '../../../../components/reservations/ReservationForm';
 import Cookies from 'js-cookie';
-import { Reservation, ReservationAdd } from '../../../types/reservations';
+import { Reservation, ReservationAdd } from '../../../../types/reservations';
 import { useRouter } from 'next/router';
 
 const EditReservation: React.FC = () => {

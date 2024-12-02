@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import DirectorForm from '../../components/director/DirectorForm';
+import DirectorForm from '../../../components/director/DirectorForm';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { DirectorAdd } from '../../types/director';
+import { DirectorAdd } from '../../../types/director';
 import './nuevodirector.css';
 
 const NewDirectorPage: React.FC = () => {

@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import ActorList from '../../components/actors/ActorList';
-import Pagination from '../../components/pagination/pagination';
+import ActorList from '../../../components/actors/ActorList';
+import Pagination from '../../../components/pagination/pagination';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { Actor } from '../../types/actors';
+import { Actor } from '../../../types/actors';
 import '../general.css';
 
 const ActorsPage: React.FC = () => {
@@ -48,7 +48,7 @@ const ActorsPage: React.FC = () => {
                   myHeaders.append("Authorization", `Bearer ${token}`);
 
                   const response = await fetch(`https://back-k1a3.onrender.com/actor/${id}/`, {
-                        method: 'DELETE',
+                        method: 'PATCH',
                         headers: myHeaders,
                   });
                   if (!response.ok) {

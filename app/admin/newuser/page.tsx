@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from 'react';
-import UserForm from '../../components/users/UserForm';
+import UserForm from '../../../components/users/UserForm';
 import Cookies from 'js-cookie';
-import { UserAdd } from '../../types/users';
+import { UserAdd } from '../../../types/users';
 import './nuevouser.css';
 
 const NewUserPage: React.FC = () => {

@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import PriceList from '../../components/price/PriceList';
-import Pagination from '../../components/pagination/pagination';
+import PriceList from '../../../components/price/PriceList';
+import Pagination from '../../../components/pagination/pagination';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { Price } from '../../types/price';
+import { Price } from '../../../types/price';
 import '../general.css';
 
 const PricePage: React.FC = () => {

@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import ProvinceForm from '../../../components/province/ProvinceForm';
+import ProvinceForm from '../../../../components/province/ProvinceForm';
 import Cookies from 'js-cookie';
-import { Province, Country, ProvinceAdd } from '../../../types/country';
-
+import { Province, Country } from '../../../../types/country';
+import '../../general.css';
 
 const EditProvincePage: React.FC = () => {
     const router = useRouter();
@@ -70,10 +70,7 @@ const EditProvincePage: React.FC = () => {
         }
     };
 
-    const updateProvince = async (updatedProvince: ProvinceAdd) => {
-
-
-
+    const updateProvince = async (updatedProvince: Partial<Province>) => {
         try {
             if (!province) {
                 throw new Error('Province data is not available');
@@ -82,7 +79,7 @@ const EditProvincePage: React.FC = () => {
             const myHeaders = new Headers();
             myHeaders.append("Authorization", `Bearer ${token}`);
             myHeaders.append("Content-Type", "application/json");
-    
+
             const response = await fetch(`https://back-k1a3.onrender.com/province/${province.id}/`, {
                 method: 'PUT',
                 headers: myHeaders,
@@ -97,8 +94,6 @@ const EditProvincePage: React.FC = () => {
             console.error('Failed to update province:', error);
         }
     };
-    
-
 
     if (loading) {
         return <p>Cargando datos de la provincia...</p>;
@@ -110,7 +105,7 @@ const EditProvincePage: React.FC = () => {
                 <h1 id="title" className="title">Editar provincia</h1>
                 <div id="edit-form" className="form-container">
                     {province ? (
-                        <ProvinceForm key="province-form" province={province} onSave={updateProvince} countries={countries} />
+                        <ProvinceForm id="province-form" province={province} onSave={updateProvince} countries={countries} />
                     ) : (
                         <p id="no-data-message">No se encontraron datos de la provincia.</p>
                     )}

@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import ProvinceForm from '../../components/province/ProvinceForm';
+import ProvinceForm from '../../../components/province/ProvinceForm';
 import Link from 'next/link';
 import Cookies from 'js-cookie';
-import { ProvinceAdd, Country } from '../../types/country';
-
+import { ProvinceAdd, Country } from '../../../types/country';
+import '../general.css';
 
 const NewProvincePage: React.FC = () => {
     const [provinces, setProvinces] = useState<ProvinceAdd[]>([]);
