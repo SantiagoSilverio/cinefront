@@ -1,4 +1,6 @@
+
 import { NextResponse } from 'next/server';
+
 
 export async function middleware(request) {
   const token = request.cookies.get('access_token');
@@ -21,7 +23,7 @@ export async function middleware(request) {
 
   // Verifica permisos si tiene token
   if (token) {
-    const url = new URL('https://back-k1a3.onrender.com/profile', request.url);
+    const url = new URL('https://back-k1a3.onrender.com/user', request.url);
     const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -32,15 +34,16 @@ export async function middleware(request) {
       const data = await response.json();
       const groups = data.groups; 
 
+      // Si es administrador y no está en /admin, redirige a /admin
       if (groups.includes('administrador')) {
-        // Si es administrador y no está en /admin, redirige a /admin
+        console.log('es administrador');
         if (pathname !== '/admin') {
           return NextResponse.redirect(new URL('/admin', request.url));
         } else {
           return NextResponse.next();
         }
       } else {
-        // Si no es administrador y está en /admin, redirige a /
+        console.log('No es administrador');
         if (pathname === '/admin') {
           return NextResponse.redirect(new URL('/', request.url));
         } else {
